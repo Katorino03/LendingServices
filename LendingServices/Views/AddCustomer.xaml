@@ -1,0 +1,164 @@
+﻿<Page x:Class="LendingServices.Views.AddCustomer"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="1200"
+      Title="AddCustomer">
+
+    <Page.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#F5F7FB" Offset="0"/>
+            <GradientStop Color="#E8ECF5" Offset="1"/>
+        </LinearGradientBrush>
+    </Page.Background>
+
+    <Grid Background="#F5F7FB">
+        <Border Background="AliceBlue"
+            CornerRadius="18"
+                Padding="30"
+                BorderBrush="#B5DCF0"
+          
+            BorderThickness="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Width="1000"
+                Height="460">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="25" Opacity="0.25"/>
+            </Border.Effect>
+
+            <ScrollViewer>
+                <StackPanel>
+
+                    <TextBlock Text="Add New Customer"
+                               FontSize="26"
+                               FontWeight="Bold"/>
+                    <TextBlock Text="Enter customer and loan details"
+                               Foreground="Gray"
+                               Margin="0,5,0,20"/>
+
+                    <Grid Margin="0,0,0,20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,10,10">
+                            <TextBlock Text="Account Number *"/>
+                            <ui:TextBox x:Name="txtAccount"
+                                        PlaceholderText="e.g. 407"
+                                        Height="38"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="0" Grid.Column="1" Margin="10,0,0,10">
+                            <TextBlock Text="Customer Name *"/>
+                            <ui:TextBox x:Name="txtName"
+                                        PlaceholderText="e.g. Juan Dela Cruz"
+                                        Height="38"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0,10">
+                            <TextBlock Text="Address *"/>
+                            <ui:TextBox x:Name="txtAddress"
+                                        PlaceholderText="e.g. San Isidro, Leyte"
+                                        Height="53"
+                                        TextWrapping="Wrap"
+                                        AcceptsReturn="True"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Margin="0,10">
+                            <TextBlock Text="Contact Number *"/>
+                            <ui:TextBox x:Name="txtContact"
+                                        PlaceholderText="e.g. 09123456789"
+                                        Height="38"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <TextBlock Text="Loan Details"
+                               FontWeight="Bold"
+                               FontSize="18"
+                               Margin="0,0,0,15"/>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,10,10">
+                            <TextBlock Text="Loan Amount (₱) *"/>
+                            <ui:TextBox x:Name="txtLoan"
+                                        PlaceholderText="e.g. 2026"
+                                        Height="38"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="0" Grid.Column="1" Margin="10,0,0,10">
+                            <TextBlock Text="Daily Payment (₱) *"/>
+                            <ui:TextBox x:Name="txtDaily"
+                                        PlaceholderText="e.g. 100"
+                                        Height="38"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0,10">
+                            <TextBlock Text="Terms (Days) *"/>
+                            <ui:TextBox x:Name="txtTerms"
+                                        PlaceholderText="e.g. 50"
+                                        Height="38"
+                                        TextChanged="txtTerms_TextChanged"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,10,10,0">
+                            <TextBlock Text="Date Loaned *"/>
+                            <DatePicker x:Name="dpLoaned"
+                                        Height="38"
+                                        SelectedDateChanged="dpLoaned_SelectedDateChanged"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="2" Grid.Column="1" Margin="10,10,0,0">
+                            <TextBlock Text="Due Date"/>
+                            <ui:TextBox x:Name="txtDue"
+                                        PlaceholderText="Auto-calculated"
+                                        Height="38"
+                                        IsReadOnly="True"
+                                        Background="#EEE"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0,25,0,0">
+                        <Button Content="Add Customer"
+                                Width="200"
+                                Height="40"
+                                Background="#2563EB"
+                                Foreground="White"
+                                BorderThickness="0"
+                                Click="AddCustomer_Click"/>
+                        <Button Content="Clear Form"
+                                Width="120"
+                                Height="40"
+                                Margin="10,0,0,0"
+                                Background="#E5E7EB"
+                                BorderThickness="0"
+                                Click="Clear_Click"/>
+                    </StackPanel>
+
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</Page>

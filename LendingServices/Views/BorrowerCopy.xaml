@@ -1,0 +1,112 @@
+﻿<Page x:Class="LendingServices.Views.BorrowerCopy"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="1100"
+      Title="BorrowerCopy"
+      Background="#F5F7FB">
+
+    <Grid Margin="20">
+        <Border Background="AliceBlue"
+                CornerRadius="18"
+                Padding="20"
+                BorderBrush="#40FFFFFF"
+                BorderThickness="1">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="25" Opacity="0.25"/>
+            </Border.Effect>
+
+            <ScrollViewer>
+                <StackPanel>
+                    <TextBlock Text="Borrower Copy / Ledger"
+                               FontSize="24"
+                               FontWeight="Bold"/>
+                    <TextBlock Text="Print or view customer payment ledger"
+                               Foreground="Gray"
+                               Margin="0,5,0,20"/>
+
+                    <Grid Margin="0,0,0,20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="{Binding Name}" FontSize="18" FontWeight="Bold"/>
+                            <TextBlock Text="Account No.: {Binding AccountNo}"/>
+                            <TextBlock Text="Address: {Binding Address}"/>
+                            <TextBlock Text="Contact #: {Binding Contact}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="Loan Amount: ₱{Binding LoanAmount}"/>
+                            <TextBlock Text="Daily Payment: ₱{Binding DailyPayment}"/>
+                            <TextBlock Text="Terms: {Binding Terms} days"/>
+                            <TextBlock Text="Date Loaned: {Binding DateLoaned, StringFormat='MMMM dd, yyyy'}"/>
+                            <TextBlock Text="Due Date: {Binding DueDate, StringFormat='MMMM dd, yyyy'}"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <DataGrid x:Name="dgLedger"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              Margin="0,0,0,20"
+                              HeadersVisibility="Column"
+                              RowHeight="30">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Day" Binding="{Binding Day}" Width="60"/>
+                            <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat='MM/dd/yyyy'}" Width="120"/>
+                            <DataGridTextColumn Header="Principal" Binding="{Binding Principal}" Width="120"/>
+                            <DataGridTextColumn Header="Signature" Binding="{Binding Signature}" Width="200"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <StackPanel Margin="0,10,0,20">
+                        <TextBlock Text="Total Loan: ₱{Binding LoanAmount}" FontWeight="Bold"/>
+                        <TextBlock Text="Total Paid: ₱{Binding TotalPaid}" FontWeight="Bold"/>
+                        <TextBlock Text="Balance: ₱{Binding Balance}" FontWeight="Bold"/>
+                    </StackPanel>
+
+                    <Grid Margin="0,20,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel>
+                            <Border BorderBrush="Black" BorderThickness="0,0,0,1" Width="250"/>
+                            <TextBlock Text="Borrower's Signature" HorizontalAlignment="Center"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1">
+                            <Border BorderBrush="Black" BorderThickness="0,0,0,1" Width="250"/>
+                            <TextBlock Text="Date" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Border Background="#2563EB"
+                            CornerRadius="12"
+                            Padding="5"
+                            Margin="0,30,0,0"
+                            BorderBrush="#2563EB"
+                            BorderThickness="1"
+                            HorizontalAlignment="Left">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="15" Opacity="0.25"/>
+                        </Border.Effect>
+                        <Button Content="Print"
+                                Width="120"
+                                Height="40"
+                                Background="#2563EB"
+                                Foreground="White"
+                                BorderThickness="0"
+                                Click="PrintNow_Click"/>
+                    </Border>
+
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</Page>
