@@ -1,71 +1,33 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using LendingServices.Models;
+using LendingServices.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace LendingServices.Views
 {
     public partial class DailyCollection : Page
     {
-        private ObservableCollection<Customer> customers;
-
+        private readonly DailyCollectionViewModel _viewModel;
 
         public DailyCollection()
         {
             InitializeComponent();
-            //replace ni na data, pag naka database kenemerut na ha
-            customers = new ObservableCollection<Customer>
-            {
-                new Customer{AccountNo=407, Name="JELBERT ANTONIO", DailyPayment=100, Balance=1200, AmountPaidToday=0},
-                new Customer{AccountNo=408, Name="MARIA CLARA", DailyPayment=120, Balance=2400, AmountPaidToday=0},
-                new Customer{AccountNo=409, Name="PEDRO SANTOS", DailyPayment=130, Balance=650, AmountPaidToday=0}
-            };
 
-            dgCustomers.ItemsSource = customers;
-            ComputeTotals();
+            _viewModel = App.ServiceProvider.GetRequiredService<DailyCollectionViewModel>();
+            DataContext = _viewModel;
+
+            this.Loaded += DailyCollection_Loaded;
         }
 
-        private void AmountChanged(object sender, TextChangedEventArgs e)
+        private async void DailyCollection_Loaded(object sender, RoutedEventArgs e)
         {
-            ComputeTotals();
-        }
-
-        private void ComputeTotals()
-        {
-            decimal totalCollectibles = customers.Sum(c => c.DailyPayment);
-            decimal totalCollection = customers.Sum(c => c.AmountPaidToday);
-            decimal netCollection = totalCollection; 
-
-            txtCollectibles.Text = $"₱ {totalCollectibles}";
-            txtTotalCollection.Text = $"₱ {totalCollection}";
-            txtNetCollection.Text = $"₱ {netCollection}";
-        }
-
-        private void RecordCollection_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Daily collection recorded successfully!",
-                            "Info", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
-
-        private void ClearAll_Click(object sender, RoutedEventArgs e)
-        {
-            foreach (var c in customers)
-            {
-                c.AmountPaidToday = 0;
-            }
-            dgCustomers.Items.Refresh();
-            ComputeTotals();
+            await _viewModel.LoadDataAsync();
         }
 
         private void PreviewPrint_Click(object sender, RoutedEventArgs e)
         {
-            PrintPreview previewPage = new PrintPreview(customers);
-
+            PrintPreview previewPage = new PrintPreview(_viewModel.Customers);
             this.NavigationService?.Navigate(previewPage);
         }
-
-
     }
 }

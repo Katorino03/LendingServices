@@ -1,4 +1,4 @@
-﻿using LendingServices.Models;
+﻿using LendingServices.DTOs;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -8,12 +8,12 @@ namespace LendingServices.Views
 {
     public partial class PrintPreview : Page
     {
-        public PrintPreview(ObservableCollection<Customer> customers)
+        public PrintPreview(ObservableCollection<DailyCollectionDTO> customers)
         {
             InitializeComponent();
 
-            var left = new ObservableCollection<Customer>();
-            var right = new ObservableCollection<Customer>();
+            var left = new ObservableCollection<DailyCollectionDTO>();
+            var right = new ObservableCollection<DailyCollectionDTO>();
 
             for (int i = 0; i < customers.Count; i++)
             {
@@ -31,14 +31,12 @@ namespace LendingServices.Views
 
             txtCollectibles.Text = $"COLLECTIBLES: ₱ {collectibles}";
             txtNet.Text = $"NET COLLECTION: ₱ {total}";
-
             txtDate.Text = $"DATE: {System.DateTime.Now:MMMM dd, yyyy}";
         }
 
         private void PrintNow_Click(object sender, RoutedEventArgs e)
         {
             PrintDialog pd = new PrintDialog();
-
             if (pd.ShowDialog() == true)
             {
                 pd.PrintVisual(printArea, "Daily Collection");

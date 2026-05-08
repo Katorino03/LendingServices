@@ -12,7 +12,8 @@ namespace LendingServices
         public MainWindow()
         {
             InitializeComponent();
-
+            MainFrame.Navigate(new Dashboard());
+            SetActive(btnDashboard);
         }
 
         private void Dashboard_Click(object sender, RoutedEventArgs e)
