@@ -29,7 +29,8 @@ namespace LendingServices.Repositories
                     CustomerName = l.Customer.Name,
                     DailyPayment = l.DailyPayment,
                     Balance = l.TotalAmountToPay - l.Payments.Sum(p => p.AmountPaid),
-                    AmountPaidToday = 0
+                    AmountPaidToday = 0,
+                    LoanTag = l.LoanType
                 })
                 .ToListAsync();
         }
@@ -55,6 +56,7 @@ namespace LendingServices.Repositories
                     if (loan != null)
                     {
                         loan.IsActive = false;
+                        loan.LoanType = "Fully Paid";
                     }
                 }
             }
@@ -65,9 +67,30 @@ namespace LendingServices.Repositories
         public async Task AddNewCustomerAndLoanAsync(Customer customer, Loan loan)
         {
             customer.Loans = new List<Loan> { loan };
-                await _context.Customers.AddAsync(customer);
-                await _context.SaveChangesAsync();
-            
+            await _context.Customers.AddAsync(customer);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<CustomerListItemDTO>> GetCustomerListAsync()
+        {
+            return await _context.Loans
+                .Include(l => l.Customer)
+                .Include(l => l.Payments)
+                .Where(l => l.IsActive)
+                .Select(l => new CustomerListItemDTO
+                {
+                    CustomerId = l.Customer.Id,
+                    AccountNo = l.Customer.AccountNo,
+                    Name = l.Customer.Name,
+                    Address = l.Customer.Address,
+                    Contact = l.Customer.ContactNo,
+                    LoanAmount = l.TotalAmountToPay,
+                    DailyPayment = l.DailyPayment,
+                    DueDate = l.DueDate,
+                    Balance = l.TotalAmountToPay - l.Payments.Sum(p => p.AmountPaid),
+                    LoanTag = l.LoanType
+                })
+                .ToListAsync();
         }
     }
 }

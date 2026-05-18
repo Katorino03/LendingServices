@@ -8,8 +8,8 @@ namespace LendingServices.Models
         public int Id { get; set; }
         public string AccountNo { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
+        public string Address { get; set; } = string.Empty;
         public string ContactNo { get; set; } = string.Empty;
-
         public ICollection<Loan> Loans { get; set; } = new List<Loan>();
     }
 
@@ -27,6 +27,7 @@ namespace LendingServices.Models
         public int TermsInDays { get; set; }
 
         public bool IsActive { get; set; } = true;
+        public string? LoanType { get; set; }
 
         public Customer Customer { get; set; } = null!;
         public ICollection<Payment> Payments { get; set; } = new List<Payment>();

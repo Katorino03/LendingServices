@@ -14,7 +14,6 @@ using System.Windows.Shapes;
 namespace LendingServices.Views
 {
 
-    /// </summary>
     public partial class Dashboard : Page
     {
         public Dashboard()

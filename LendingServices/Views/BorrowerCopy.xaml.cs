@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using LendingServices.Models; 
+using LendingServices.Models;
 
 namespace LendingServices.Views
 {
@@ -11,7 +11,8 @@ namespace LendingServices.Views
         {
             InitializeComponent();
         }
-        public BorrowerCopy(CustomerList.Customer customer, ObservableCollection<LedgerEntry> ledgerEntries)
+
+        public BorrowerCopy(Customer customer, ObservableCollection<LedgerEntry> ledgerEntries)
         {
             InitializeComponent();
             this.DataContext = customer;

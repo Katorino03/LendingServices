@@ -2,13 +2,9 @@
 using CommunityToolkit.Mvvm.Input;
 using LendingServices.Models;
 using LendingServices.Repositories;
-using LendingServices.Views;
-using Microsoft.VisualBasic;
 using System;
-using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
-
 
 namespace LendingServices.ViewModels
 {
@@ -24,13 +20,14 @@ namespace LendingServices.ViewModels
         [ObservableProperty] private int _terms;
         [ObservableProperty] private DateTime _dateLoaned = DateTime.Now;
         [ObservableProperty] private DateTime? _dueDate;
+        [ObservableProperty] private string _selectedLoanType = string.Empty;
+
         public AddCustomerViewModel(ILoanRepository loanRepository)
         {
             _loanRepository = loanRepository;
             CalculateDueDate();
         }
 
-        // The MVVM Toolkit automatically calls these when Terms or Date Loaned change!
         partial void OnTermsChanged(int value) => CalculateDueDate();
         partial void OnDateLoanedChanged(DateTime value) => CalculateDueDate();
         private void CalculateDueDate()
@@ -50,37 +47,35 @@ namespace LendingServices.ViewModels
         {
             try
             {
-                // Basic validation 
                 if (string.IsNullOrWhiteSpace(CustomerName) || LoanAmount <= 0)
                 {
                     MessageBox.Show("Please fill in all required fields.", "Warning", MessageBoxButton.OK,
                     MessageBoxImage.Warning);
                     return;
                 }
-                // 1. Create the Database Entities 
+
                 var newCustomer = new Customer
                 {
                     AccountNo = this.AccountNo,
                     Name = this.CustomerName,
-                    // Assuming your Customer model has these, otherwise add them to the Model! 
-                    //Address = this.Address, 
+                    Address = this.Address,
                     ContactNo = this.ContactNo
                 };
 
                 var newLoan = new Loan
                 {
+                    PrincipalAmount = this.LoanAmount,
                     TotalAmountToPay = this.LoanAmount,
                     DailyPayment = this.DailyPayment,
                     TermsInDays = this.Terms,
                     DateLoaned = this.DateLoaned,
                     DueDate = this.DueDate ?? DateTime.Now,
-                    IsActive = true
+                    IsActive = true,
+                    LoanType = string.IsNullOrEmpty(this.SelectedLoanType) ? null : this.SelectedLoanType
                 };
 
-                // 2. Save to database 
                 await _loanRepository.AddNewCustomerAndLoanAsync(newCustomer, newLoan);
                 MessageBox.Show("Customer and Loan added successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                // 3. Clear the form 
                 ClearForm();
             }
             catch (Exception ex)
@@ -88,8 +83,8 @@ namespace LendingServices.ViewModels
                 MessageBox.Show($"Database Error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        [RelayCommand]
 
+        [RelayCommand]
         private void ClearForm()
         {
             AccountNo = string.Empty;
@@ -100,6 +95,7 @@ namespace LendingServices.ViewModels
             DailyPayment = 0;
             Terms = 0;
             DateLoaned = DateTime.Now;
+            SelectedLoanType = string.Empty;
         }
     }
 }

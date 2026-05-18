@@ -1,8 +1,6 @@
-﻿using LendingServices.ViewModels;
+﻿using System.Windows.Controls;
+using LendingServices.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Windows;
-using System.Windows.Controls;
 
 namespace LendingServices.Views
 {

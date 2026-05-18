@@ -10,6 +10,7 @@ namespace LendingServices.DTOs
         public string CustomerName { get; set; } = string.Empty;
         public decimal DailyPayment { get; set; }
         public decimal Balance { get; set; }
+        public string LoanTag { get; set; }
 
         [ObservableProperty]
         private decimal _amountPaidToday;

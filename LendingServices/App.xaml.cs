@@ -21,11 +21,13 @@ namespace LendingServices
                 .ConfigureServices((context, services) =>
                 {
                     services.AddDbContext<AngCoolDbContext>();
-                    services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-                    services.AddScoped<ILoanRepository, LoanRepository>();
+                    services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+                    services.AddTransient<ILoanRepository, LoanRepository>();
                     services.AddTransient<DailyCollectionViewModel>();
                     services.AddTransient<AddCustomerViewModel>();
+                    services.AddTransient<CustomerListViewModel>(); 
                     services.AddTransient<LoginWindow>();
+                    services.AddTransient<CustomerList>();
                 })
                 .Build();
 
@@ -38,8 +40,8 @@ namespace LendingServices
 
             using (var scope = _host.Services.CreateScope())
             {
-                var dbContext = scope.ServiceProvider.GetRequiredService<AngCoolDbContext>();
-                await dbContext.Database.MigrateAsync();
+                // var dbContext = scope.ServiceProvider.GetRequiredService<AngCoolDbContext>();
+                // await dbContext.Database.MigrateAsync();
             }
 
             var loginWindow = _host.Services.GetRequiredService<LoginWindow>();

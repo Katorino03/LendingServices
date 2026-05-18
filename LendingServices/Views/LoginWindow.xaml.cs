@@ -16,7 +16,6 @@ namespace LendingServices.Views
             string username = txtUsername.Text;
             string password = txtPassword.Password;
 
-            // SAMPLE LOGIN VALIDATION
             if (username == "admin" && password == "1234")
             {
                
@@ -36,7 +35,6 @@ namespace LendingServices.Views
 
         private void ShowPassword_Click(object sender, RoutedEventArgs e)
         {
-            // Simple toggle message (for demo purposes)
             if (!isPasswordVisible)
             {
                 MessageBox.Show("Password visibility toggle sample.");

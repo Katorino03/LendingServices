@@ -27,6 +27,7 @@
         </StackPanel>
 
         <Border Grid.Row="1"
+                Panel.ZIndex="1"
                 CornerRadius="15"
                 Padding="10"
                 Margin="0,20,0,20"
@@ -93,7 +94,8 @@
 
         <Frame x:Name="MainFrame"
                Grid.Row="2"
-               NavigationUIVisibility="Hidden"/>
+               NavigationUIVisibility="Hidden"
+               ClipToBounds="True"/>
 
     </Grid>
 </Window>
