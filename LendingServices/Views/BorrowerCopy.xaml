@@ -15,7 +15,7 @@
 
        
         <Border Width="794"
-                Height="1123"
+                Height="1125"
                 Background="White"
                 Padding="40"
                 BorderBrush="#D1D5DB"
@@ -34,13 +34,15 @@
 
                    
                     <TextBlock Text="Borrower Ledger Copy"
-                               FontSize="26"
+                               FontSize="30"
                                FontWeight="SemiBold"
-                               Foreground="#0F172A"/>
+                               Foreground="#0F172A"
+                               Margin="0,0,0,0"/>
 
                     <TextBlock Text="Payment record and loan details"
                                Foreground="#64748B"
-                               Margin="0,4,0,25"/>
+                               Margin="0,1,0,5"
+                               FontSize="18"/>
 
                    
                     <Border Background="#F8FAFC"
@@ -48,7 +50,7 @@
                             Padding="18"
                             BorderBrush="#E2E8F0"
                             BorderThickness="1"
-                            Margin="0,0,0,20">
+                            Margin="0,0,0,5">
 
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -64,30 +66,43 @@
                                            Foreground="#0F172A"/>
 
                                 <TextBlock Text="Account No.: {Binding AccountNo}"
-                                           Foreground="#64748B"/>
+                                           Foreground="#64748B"
+                                           FontSize="12"/>
                                 <TextBlock Text="Address: {Binding Address}"
-                                           Foreground="#64748B"/>
+                                           Foreground="#64748B"
+                                           FontSize="12"/>
                                 <TextBlock Text="Contact #: {Binding Contact}"
-                                           Foreground="#64748B"/>
+                                           Foreground="#64748B"
+                                           FontSize="12"/>
 
                             </StackPanel>
 
                             <StackPanel Grid.Column="1">
 
                                 <TextBlock Text="Loan Amount: ₱{Binding LoanAmount}"
-                                           Foreground="#334155"/>
+                                           Foreground="#334155"
+                                           FontSize="12"
+                                           Margin="0,0,0,0"/>
 
                                 <TextBlock Text="Daily Payment: ₱{Binding DailyPayment}"
-                                           Foreground="#334155"/>
+                                           Foreground="#334155"
+                                           FontSize="12"
+                                           Margin="0,0,0,0"/>
 
                                 <TextBlock Text="Terms: {Binding Terms} days"
-                                           Foreground="#334155"/>
+                                           Foreground="#334155"
+                                           FontSize="12"
+                                           Margin="0,0,0,0"/>
 
                                 <TextBlock Text="Date Loaned: {Binding DateLoaned, StringFormat='MMMM dd, yyyy'}"
-                                           Foreground="#334155"/>
+                                           Foreground="#334155"
+                                           FontSize="11"
+                                           Margin="0,0,0,0"/>
 
                                 <TextBlock Text="Due Date: {Binding DueDate, StringFormat='MMMM dd, yyyy'}"
-                                           Foreground="#334155"/>
+                                           Foreground="#334155"
+                                           FontSize="12"
+                                           Margin="0,0,0,0"/>
 
                             </StackPanel>
                         </Grid>
@@ -99,16 +114,17 @@
                             BorderBrush="#E2E8F0"
                             BorderThickness="1"
                             Padding="10"
-                            Margin="0,0,0,20">
+                            Margin="0,0,0,10">
 
                         <DataGrid x:Name="dgLedger"
                                   AutoGenerateColumns="False"
                                   CanUserAddRows="False"
                                   HeadersVisibility="Column"
                                   RowHeight="30"
-                                  FontSize="13"
+                                  FontSize="15"
                                   Background="Transparent"
-                                  BorderThickness="0">
+                                  BorderThickness="0"
+                                  Margin="0,0,0,0">
 
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Day" Binding="{Binding Day}" Width="60"/>
@@ -126,23 +142,27 @@
                             Padding="18"
                             BorderBrush="#E2E8F0"
                             BorderThickness="1"
-                            Margin="0,0,0,20">
+                            Margin="0,0,0,25">
 
                         <StackPanel>
 
                             <TextBlock Text="Total Loan: ₱{Binding LoanAmount}"
                                        FontWeight="SemiBold"
-                                       Foreground="#0F172A"/>
+                                       FontSize="15"
+                                       Foreground="#0F172A"
+                                       Margin="0,0,0,0"/>
 
                             <TextBlock Text="Total Paid: ₱{Binding TotalPaid}"
                                        FontWeight="SemiBold"
+                                       FontSize="15"
                                        Foreground="#10B981"
-                                       Margin="0,5,0,0"/>
+                                       Margin="0,0,0,0"/>
 
                             <TextBlock Text="Balance: ₱{Binding Balance}"
                                        FontWeight="SemiBold"
+                                       FontSize="15"
                                        Foreground="#EF4444"
-                                       Margin="0,5,0,0"/>
+                                       Margin="0,0,0,0"/>
 
                         </StackPanel>
                     </Border>
@@ -158,11 +178,13 @@
                         <StackPanel>
                             <Border BorderBrush="#94A3B8"
                                     BorderThickness="0,0,0,1"
-                                    Width="240"/>
+                                    Width="240"
+                                    Margin="0,0,0,1"/>
                             <TextBlock Text="Borrower's Signature"
                                        HorizontalAlignment="Center"
                                        Foreground="#64748B"
-                                       Margin="0,6,0,0"/>
+                                       Margin="0,6,0,0"
+                                       FontSize="15"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="1">
@@ -172,7 +194,8 @@
                             <TextBlock Text="Date"
                                        HorizontalAlignment="Center"
                                        Foreground="#64748B"
-                                       Margin="0,6,0,0"/>
+                                       Margin="0,6,0,0"
+                                       FontSize="15"/>
                         </StackPanel>
 
                     </Grid>
@@ -188,11 +211,13 @@
                     <Button Content="Print"
                             Width="140"
                             Height="42"
-                            Margin="0,20,0,0"
+                            Margin="0,0,0,0"
                             HorizontalAlignment="Left"
                             Foreground="White"
                             BorderThickness="0"
-                            Click="PrintNow_Click">
+                            Click="PrintNow_Click"
+                            FontSize="15"
+                            FontWeight="SemiBold">
 
                         <Button.Background>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">

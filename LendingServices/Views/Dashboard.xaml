@@ -39,29 +39,29 @@
 
             <Border>
                 <StackPanel>
-                    <TextBlock Text="Total Outstanding" Foreground="Gray"/>
-                    <TextBlock Text="₱00,000" FontSize="20" FontWeight="Bold"/>
+                    <TextBlock Text="Total Outstanding" FontSize = "15" Foreground="Gray" FontWeight="SemiBold"/>
+                    <TextBlock Text="₱00,000" FontSize="30"  FontWeight="Bold"/>
                 </StackPanel>
             </Border>
 
             <Border>
                 <StackPanel>
-                    <TextBlock Text="Overdue Customers" Foreground="Gray"/>
-                    <TextBlock Text="0" FontSize="20" Foreground="Red" FontWeight="Bold"/>
+                    <TextBlock Text="Overdue Customers" FontSize = "15" Foreground="Gray" FontWeight="SemiBold"/>
+                    <TextBlock Text="0" FontSize="30" Foreground="Red" FontWeight="Bold"/>
                 </StackPanel>
             </Border>
 
             <Border>
                 <StackPanel>
-                    <TextBlock Text="Due This Week" Foreground="Gray"/>
-                    <TextBlock Text="0" FontSize="20" Foreground="#F59E0B" FontWeight="Bold"/>
+                    <TextBlock Text="Due This Week" FontSize = "15" Foreground="Gray" FontWeight="SemiBold"/>
+                    <TextBlock Text="0" FontSize="30" Foreground="#F59E0B" FontWeight="Bold"/>
                 </StackPanel>
             </Border>
 
             <Border>
                 <StackPanel>
-                    <TextBlock Text="Daily Receipts" Foreground="Gray"/>
-                    <TextBlock Text="₱00,000" FontSize="20" Foreground="Green" FontWeight="Bold"/>
+                    <TextBlock Text="Daily Receipts" FontSize = "15" Foreground="Gray" FontWeight="SemiBold"/>
+                    <TextBlock Text="₱00,000" FontSize="30" Foreground="Green" FontWeight="Bold"/>
                 </StackPanel>
             </Border>
 
@@ -85,7 +85,7 @@
                 </Border.Effect>
 
                 <StackPanel>
-                    <TextBlock Text="Overdue Customers" Foreground="#EF4444" FontWeight="Bold"/>
+                    <TextBlock Text="Overdue Customers" FontSize = "20" Foreground="#EF4444" FontWeight="Bold"/>
                     <StackPanel Margin="0,10,0,0">
                         <TextBlock Text=" " Foreground="#B91C1C"/>
                     </StackPanel>
@@ -105,8 +105,8 @@
                 </Border.Effect>
 
                 <StackPanel>
-                    <TextBlock Text="Daily Reciept" FontWeight="Bold"/>
-                    <TextBlock Text="(Bar and line charts for visualizing daily reciept" Foreground="Gray"/>
+                    <TextBlock Text="Daily Reciept" FontSize = "20" FontWeight="Bold"/>
+                    <TextBlock Text="(Bar and line charts for visualizing daily reciept" FontSize = "15" Foreground="Gray"/>
                 </StackPanel>
             </Border>
 

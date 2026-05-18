@@ -52,14 +52,14 @@
                 <StackPanel Margin="0,0,0,25">
 
                     <TextBlock Text="Daily Collection"
-                               FontSize="32"
+                               FontSize="30"
                                FontWeight="SemiBold"
                                Foreground="#0F172A"/>
 
                     <TextBlock Text="Record and monitor customer payments"
                                Margin="0,5,0,0"
                                Foreground="#64748B"
-                               FontSize="13"/>
+                               FontSize="18"/>
                 </StackPanel>
 
 
@@ -91,7 +91,7 @@
 
                             <TextBlock Text="Total Collectibles"
                                        Foreground="#64748B"
-                                       FontSize="13"/>
+                                       FontSize="20"/>
 
                             <TextBlock Text="{Binding TotalCollectibles, StringFormat='₱ {0:N2}'}"
                                        Margin="0,8,0,0"
@@ -119,7 +119,7 @@
 
                             <TextBlock Text="Total Collection"
                                        Foreground="#64748B"
-                                       FontSize="13"/>
+                                       FontSize="20"/>
 
                             <TextBlock Text="{Binding TotalCollection, StringFormat='₱ {0:N2}'}"
                                        Margin="0,8,0,0"
@@ -148,7 +148,7 @@
 
                             <TextBlock Text="Net Collection"
                                        Foreground="#64748B"
-                                       FontSize="13"/>
+                                       FontSize="20"/>
 
                             <TextBlock Text="{Binding NetCollection, StringFormat='₱ {0:N2}'}"
                                        Margin="0,8,0,0"
@@ -173,7 +173,7 @@
                               CanUserAddRows="False"
                               HeadersVisibility="Column"
                               RowHeight="42"
-                              FontSize="14"
+                              FontSize="16"
                               Background="Transparent"
                               BorderThickness="0"
                               GridLinesVisibility="None">
@@ -238,6 +238,7 @@
                             Margin="0,0,12,0"
                             Foreground="White"
                             FontWeight="SemiBold"
+                            FontSize="18"
                             BorderThickness="0"
                             Cursor="Hand"
                             Command="{Binding RecordCollectionCommand}">
@@ -257,6 +258,7 @@
                             Background="#334155"
                             Foreground="White"
                             FontWeight="SemiBold"
+                            FontSize="18"
                             BorderThickness="0"
                             Cursor="Hand"
                             Click="PreviewPrint_Click"/>
@@ -267,6 +269,7 @@
                             Background="#E2E8F0"
                             Foreground="#0F172A"
                             FontWeight="SemiBold"
+                            FontSize="18"
                             BorderThickness="0"
                             Cursor="Hand"
                             Command="{Binding ClearAllCommand}"/>

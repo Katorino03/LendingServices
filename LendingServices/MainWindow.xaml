@@ -20,10 +20,10 @@
 
 
         <StackPanel>
-            <TextBlock FontSize="26" FontWeight="Bold" Foreground="#0C2794">
+            <TextBlock FontSize="35" FontWeight="Bold" Foreground="#0C2794">
                 Ang Cool Lending Services
             </TextBlock>
-            <TextBlock Text="Manage customers, balances, and daily receipts" Foreground="Gray"/>
+            <TextBlock Text="Manage customers, balances, and daily receipts" FontSize = "18" Foreground="Gray"/>
         </StackPanel>
 
         <Border Grid.Row="1"
@@ -84,11 +84,11 @@
 
                 </Grid.Resources>
 
-                <Button x:Name="btnDashboard" Grid.Column="0" Content="Dashboard" Click="Dashboard_Click"/>
-                <Button x:Name="btnCustomerList" Grid.Column="1" Content="Customer List" Click="CustomerList_Click"/>
-                <Button x:Name="btnAddCustomer" Grid.Column="2" Content="Add Customer" Click="AddCustomer_Click"/>
-                <Button x:Name="btnDailyCollection" Grid.Column="3" Content="Daily Collection" Click="DailyCollection_Click"/>
-                <Button x:Name="btnBorrowerCopy" Grid.Column="4" Content="Borrower Copy" Click="BorrowerCopy_Click"/>
+                <Button x:Name="btnDashboard" Grid.Column="0" Content="Dashboard" Click="Dashboard_Click" FontSize="18" FontWeight="SemiBold"/>
+                <Button x:Name="btnCustomerList" Grid.Column="1" Content="Customer List" Click="CustomerList_Click" FontSize="18" FontWeight="SemiBold"/>
+                <Button x:Name="btnAddCustomer" Grid.Column="2" Content="Add Customer" Click="AddCustomer_Click" FontSize="18" FontWeight="SemiBold"/>
+                <Button x:Name="btnDailyCollection" Grid.Column="3" Content="Daily Collection" Click="DailyCollection_Click" FontSize="18" FontWeight="SemiBold"/>
+                <Button x:Name="btnBorrowerCopy" Grid.Column="4" Content="Borrower Copy" Click="BorrowerCopy_Click" FontSize="18" FontWeight="SemiBold"/>
             </Grid>
         </Border>
 
