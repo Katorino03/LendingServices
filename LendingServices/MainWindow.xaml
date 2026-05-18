@@ -18,7 +18,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Header -->
+
         <StackPanel>
             <TextBlock FontSize="26" FontWeight="Bold" Foreground="#0C2794">
                 Ang Cool Lending Services
@@ -48,22 +48,39 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Button Style -->
+
                 <Grid.Resources>
+
                     <Style TargetType="Button">
                         <Setter Property="Background" Value="Transparent"/>
                         <Setter Property="BorderThickness" Value="0"/>
                         <Setter Property="Padding" Value="15,8"/>
                         <Setter Property="Margin" Value="10,0"/>
                         <Setter Property="Cursor" Value="Hand"/>
-                        <Setter Property="Foreground" Value="#444"/>
+                        <Setter Property="Foreground" Value="#475569"/>
                         <Setter Property="FontWeight" Value="SemiBold"/>
+
+
+                        <Setter Property="MinHeight" Value="34"/>
+                        <Setter Property="MinWidth" Value="90"/>
+
                         <Style.Triggers>
+
+
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Foreground" Value="#2563EB"/>
+                                <Setter Property="Background" Value="#EAF2FF"/>
                             </Trigger>
+
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Background" Value="#2563EB"/>
+                            </Trigger>
+
                         </Style.Triggers>
                     </Style>
+
                 </Grid.Resources>
 
                 <Button x:Name="btnDashboard" Grid.Column="0" Content="Dashboard" Click="Dashboard_Click"/>

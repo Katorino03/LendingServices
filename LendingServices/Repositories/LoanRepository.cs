@@ -61,5 +61,13 @@ namespace LendingServices.Repositories
 
             await _context.SaveChangesAsync();
         }
+
+        public async Task AddNewCustomerAndLoanAsync(Customer customer, Loan loan)
+        {
+            customer.Loans = new List<Loan> { loan };
+                await _context.Customers.AddAsync(customer);
+                await _context.SaveChangesAsync();
+            
+        }
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Windows;
 using LendingServices.ViewModels;
+using LendingServices.Views;
 
 namespace LendingServices
 {
@@ -23,7 +24,8 @@ namespace LendingServices
                     services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
                     services.AddScoped<ILoanRepository, LoanRepository>();
                     services.AddTransient<DailyCollectionViewModel>();
-                    services.AddTransient<MainWindow>();
+                    services.AddTransient<AddCustomerViewModel>();
+                    services.AddTransient<LoginWindow>();
                 })
                 .Build();
 
@@ -40,8 +42,8 @@ namespace LendingServices
                 await dbContext.Database.MigrateAsync();
             }
 
-            var mainWindow = _host.Services.GetRequiredService<MainWindow>();
-            mainWindow.Show();
+            var loginWindow = _host.Services.GetRequiredService<LoginWindow>();
+            loginWindow.Show();
 
             base.OnStartup(e);
         }

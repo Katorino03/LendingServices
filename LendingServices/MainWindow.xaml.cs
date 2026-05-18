@@ -14,6 +14,7 @@ namespace LendingServices
             InitializeComponent();
             MainFrame.Navigate(new Dashboard());
             SetActive(btnDashboard);
+
         }
 
         private void Dashboard_Click(object sender, RoutedEventArgs e)
@@ -56,6 +57,6 @@ namespace LendingServices
             activeBtn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#E8F0FF"));
         }
     }
-    
+
 }
 

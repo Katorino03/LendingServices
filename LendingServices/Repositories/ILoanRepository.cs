@@ -9,5 +9,6 @@ namespace LendingServices.Repositories
     {
         Task<List<DailyCollectionDTO>> GetDailyCollectionListAsync();
         Task SaveDailyCollectionsAsync(IEnumerable<DailyCollectionDTO> collections);
+        Task AddNewCustomerAndLoanAsync(Customer customer, Loan loan);
     }
 }

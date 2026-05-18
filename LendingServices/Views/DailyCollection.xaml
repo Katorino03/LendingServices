@@ -3,133 +3,278 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       Title="DailyCollection"
-      Width="1100"
+      Width="1200"
       Height="500">
 
     <Page.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#F5F7FB" Offset="0"/>
-            <GradientStop Color="#E8ECF5" Offset="1"/>
+            <GradientStop Color="#EEF2FF" Offset="0"/>
+            <GradientStop Color="#F0FDFF" Offset="0.5"/>
+            <GradientStop Color="#EEF2FF" Offset="1"/>
         </LinearGradientBrush>
     </Page.Background>
 
-    <Grid Background="#F5F7FB" Margin="20">
-        <Border Background="#F5F7FB"
-                CornerRadius="18"
-                Padding="20"
+    <Grid Margin="20">
+
+        <Ellipse Width="650"
+                 Height="650"
+                 Fill="#3B82F6"
+                 Opacity="0.08"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 Margin="-220,-220,0,0"/>
+
+        <Ellipse Width="500"
+                 Height="500"
+                 Fill="#8B5CF6"
+                 Opacity="0.06"
+                 HorizontalAlignment="Right"
+                 VerticalAlignment="Bottom"
+                 Margin="0,0,-180,-180"/>
+
+        <Border CornerRadius="28"
+                Padding="35"
+                Background="#CCFFFFFF"
                 BorderBrush="#40FFFFFF"
                 BorderThickness="1">
+
             <Border.Effect>
-                <DropShadowEffect BlurRadius="25" Opacity="0.25"/>
+                <DropShadowEffect BlurRadius="40"
+                                  ShadowDepth="0"
+                                  Opacity="0.18"/>
             </Border.Effect>
 
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
+              HorizontalScrollBarVisibility="Disabled"
+              Padding="35">
             <StackPanel>
-                <TextBlock Text="Daily Collection Sheet"
-                           FontSize="26"
-                           FontWeight="Bold" Foreground="#FF0C2794"/>
-                <TextBlock Text="Record daily payments from customers"
-                           Foreground="Gray"
-                           Margin="0,5,0,20"/>
 
-                <Grid Margin="0,0,0,20">
+                <StackPanel Margin="0,0,0,25">
+
+                    <TextBlock Text="Daily Collection"
+                               FontSize="32"
+                               FontWeight="SemiBold"
+                               Foreground="#0F172A"/>
+
+                    <TextBlock Text="Record and monitor customer payments"
+                               Margin="0,5,0,0"
+                               Foreground="#64748B"
+                               FontSize="13"/>
+                </StackPanel>
+
+
+              
+                <Grid Margin="0,0,0,25">
+
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Border Background="AliceBlue" CornerRadius="10" Padding="15" Margin="5"
-                            BorderBrush="#B5DCF0" BorderThickness="2">
+                 
+                    <Border Grid.Column="0"
+                            Margin="0,0,10,0"
+                            Padding="22"
+                            CornerRadius="18"
+                            Background="#FFEDFCFC"
+                            BorderBrush="#FF7BDAEE"
+                            BorderThickness="1">
+
                         <Border.Effect>
-                            <DropShadowEffect BlurRadius="15" Opacity="0.2"/>
+                            <DropShadowEffect BlurRadius="18"
+                                              ShadowDepth="0"
+                                              Opacity="0.10"/>
                         </Border.Effect>
-                        <TextBlock Text="{Binding TotalCollectibles, StringFormat='₱ {0:N2}'}" Foreground="#2563EB" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
+
+                        <StackPanel>
+
+                            <TextBlock Text="Total Collectibles"
+                                       Foreground="#64748B"
+                                       FontSize="13"/>
+
+                            <TextBlock Text="{Binding TotalCollectibles, StringFormat='₱ {0:N2}'}"
+                                       Margin="0,8,0,0"
+                                       FontSize="24"
+                                       FontWeight="Bold"
+                                       Foreground="#2563EB"/>
+                        </StackPanel>
                     </Border>
 
-                    <Border Background="AliceBlue" CornerRadius="10" Padding="15" Margin="5" Grid.Column="1"
-                            BorderBrush="#B5DCF0" BorderThickness="2">
+                    <Border Grid.Column="1"
+                            Margin="5,0"
+                            Padding="22"
+                            CornerRadius="18"
+                            Background="#FFE9FEE5"
+                            BorderBrush="#FF6AF98A"
+                            BorderThickness="1">
+
                         <Border.Effect>
-                            <DropShadowEffect BlurRadius="15" Opacity="0.2"/>
+                            <DropShadowEffect BlurRadius="18"
+                                              ShadowDepth="0"
+                                              Opacity="0.10"/>
                         </Border.Effect>
-                        <TextBlock Text="{Binding TotalCollection, StringFormat='₱ {0:N2}'}" Foreground="#10B981" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
+
+                        <StackPanel>
+
+                            <TextBlock Text="Total Collection"
+                                       Foreground="#64748B"
+                                       FontSize="13"/>
+
+                            <TextBlock Text="{Binding TotalCollection, StringFormat='₱ {0:N2}'}"
+                                       Margin="0,8,0,0"
+                                       FontSize="24"
+                                       FontWeight="Bold"
+                                       Foreground="#10B981"/>
+                        </StackPanel>
                     </Border>
 
-                    <Border Background="AliceBlue" CornerRadius="10" Padding="15" Margin="5" Grid.Column="2"
-                            BorderBrush="#B5DCF0" BorderThickness="1">
+                    
+                    <Border Grid.Column="2"
+                            Margin="10,0,0,0"
+                            Padding="22"
+                            CornerRadius="18"
+                            Background="#FFFAECFB"
+                            BorderBrush="#FFC35DF3"
+                            BorderThickness="1">
+
                         <Border.Effect>
-                            <DropShadowEffect BlurRadius="15" Opacity="0.2"/>
+                            <DropShadowEffect BlurRadius="18"
+                                              ShadowDepth="0"
+                                              Opacity="0.10"/>
                         </Border.Effect>
-                        <TextBlock Text="{Binding NetCollection, StringFormat='₱ {0:N2}'}" Foreground="#F59E0B" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
+
+                        <StackPanel>
+
+                            <TextBlock Text="Net Collection"
+                                       Foreground="#64748B"
+                                       FontSize="13"/>
+
+                            <TextBlock Text="{Binding NetCollection, StringFormat='₱ {0:N2}'}"
+                                       Margin="0,8,0,0"
+                                       FontSize="24"
+                                       FontWeight="Bold"
+                                       Foreground="#F59E0B"/>
+                        </StackPanel>
                     </Border>
                 </Grid>
 
-                <DataGrid x:Name="dgCustomers"
-                      ItemsSource="{Binding Customers}" 
-                      AutoGenerateColumns="False"
-                      CanUserAddRows="False"
-                      Margin="0,0,0,20"
-                      HeadersVisibility="Column"
-                      RowHeight="35"
-                      FontSize="14">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Account No." Binding="{Binding AccountNo}" Width="100"/>
-                        <DataGridTextColumn Header="Customer Name" Binding="{Binding CustomerName}" Width="200"/>
-                        <DataGridTextColumn Header="Daily Payment" Binding="{Binding DailyPayment}" Width="120"/>
-                        <DataGridTextColumn Header="Balance" Binding="{Binding Balance}" Width="120"/>
-                        <DataGridTextColumn Header="Amount Paid Today"
-                            Binding="{Binding AmountPaidToday, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            Width="150"/>
-                    </DataGrid.Columns>
-                </DataGrid>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Border Background="AliceBlue"
+                        CornerRadius="20"
+                        Padding="18"
+                        BorderBrush="#E2E8F0"
+                        BorderThickness="1"
+                        Margin="0,0,0,25">
 
-                    <Border Background="#2563EB"
-            CornerRadius="12"
-            Padding="5"
-            Margin="5"
-            BorderBrush="#40FFFFFF"
-            BorderThickness="1">
-                        <Border.Effect>
-                            <DropShadowEffect BlurRadius="15" Opacity="0.25"/>
-                        </Border.Effect>
-                        <Button Content="Record Collection" Width="180" Height="40" Background="#2563EB" Foreground="White" BorderThickness="0"
-                                Command="{Binding RecordCollectionCommand}"/>
-                    </Border>
+                    <DataGrid x:Name="dgCustomers"
+                              ItemsSource="{Binding Customers}"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              HeadersVisibility="Column"
+                              RowHeight="42"
+                              FontSize="14"
+                              Background="Transparent"
+                              BorderThickness="0"
+                              GridLinesVisibility="None">
 
-                    <Border Background="Gray"
-            CornerRadius="12"
-            Padding="5"
-            Margin="5"
-            BorderBrush="#40FFFFFF"
-            BorderThickness="1">
-                        <Border.Effect>
-                            <DropShadowEffect BlurRadius="15" Opacity="0.25"/>
-                        </Border.Effect>
-                        <Button Content="Preview and Print"
-                Width="180"
-                Height="40"
-                Background="Gray"
-                Foreground="White"
-                BorderThickness="0"
-                Click="PreviewPrint_Click"/>
-                    </Border>
+                        <DataGrid.Resources>
 
-                    <Border Background="#E5E7EB"
-            CornerRadius="12"
-            Padding="5"
-            Margin="5"
-            BorderBrush="#40FFFFFF"
-            BorderThickness="1">
-                        <Border.Effect>
-                            <DropShadowEffect BlurRadius="15" Opacity="0.25"/>
-                        </Border.Effect>
-                        <Button Content="Clear All" Width="120" Height="40" Background="#E5E7EB" BorderThickness="0" Command="{Binding ClearAllCommand}"/>
-                    </Border>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="Background" Value="#F8FAFC"/>
+                                <Setter Property="Foreground" Value="#334155"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Padding" Value="12"/>
+                                <Setter Property="Height" Value="45"/>
+                            </Style>
+
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Padding" Value="10"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Style>
+
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Margin" Value="0,2,0,2"/>
+                            </Style>
+
+                        </DataGrid.Resources>
+
+                        <DataGrid.Columns>
+
+                            <DataGridTextColumn Header="Account No."
+                                                Binding="{Binding AccountNo}"
+                                                Width="110"/>
+
+                            <DataGridTextColumn Header="Customer Name"
+                                                Binding="{Binding CustomerName}"
+                                                Width="240"/>
+
+                            <DataGridTextColumn Header="Daily Payment"
+                                                Binding="{Binding DailyPayment}"
+                                                Width="150"/>
+
+                            <DataGridTextColumn Header="Balance"
+                                                Binding="{Binding Balance}"
+                                                Width="150"/>
+
+                            <DataGridTextColumn Header="Amount Paid Today"
+                                                Binding="{Binding AmountPaidToday, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Width="180"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+
+
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+
+                    <Button Content="Record Collection"
+                            Width="220"
+                            Height="48"
+                            Margin="0,0,12,0"
+                            Foreground="White"
+                            FontWeight="SemiBold"
+                            BorderThickness="0"
+                            Cursor="Hand"
+                            Command="{Binding RecordCollectionCommand}">
+
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#2563EB" Offset="0"/>
+                                <GradientStop Color="#7C3AED" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+
+                    <Button Content="Preview &amp; Print"
+                            Width="180"
+                            Height="48"
+                            Margin="0,0,12,0"
+                            Background="#334155"
+                            Foreground="White"
+                            FontWeight="SemiBold"
+                            BorderThickness="0"
+                            Cursor="Hand"
+                            Click="PreviewPrint_Click"/>
+
+                    <Button Content="Clear All"
+                            Width="130"
+                            Height="48"
+                            Background="#E2E8F0"
+                            Foreground="#0F172A"
+                            FontWeight="SemiBold"
+                            BorderThickness="0"
+                            Cursor="Hand"
+                            Command="{Binding ClearAllCommand}"/>
 
                 </StackPanel>
 
-            </StackPanel>
+               </StackPanel>
+            </ScrollViewer>
         </Border>
     </Grid>
 </Page>

@@ -1,173 +1,278 @@
 ﻿<Page x:Class="LendingServices.Views.CustomerList"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:LendingServices.Views"
-      mc:Ignorable="d" 
-      d:DesignHeight="500" d:DesignWidth="1200"
-      Title="CustomerList">
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
+      d:DesignHeight="500"
+      d:DesignWidth="1200">
 
     <Page.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#F5F7FB" Offset="0"/>
-            <GradientStop Color="#E8ECF5" Offset="1"/>
+            <GradientStop Color="#EEF2FF" Offset="0"/>
+            <GradientStop Color="#F0FDFF" Offset="0.5"/>
+            <GradientStop Color="#EEF2FF" Offset="1"/>
         </LinearGradientBrush>
     </Page.Background>
 
     <Grid Margin="20">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
 
-        <Border Background="AliceBlue"
-                CornerRadius="15"
-                Padding="15"
-                BorderBrush="#B5DCF0"
-                BorderThickness="2">
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="18" Opacity="0.25"/>
-            </Border.Effect>
+        <Ellipse Width="650"
+                 Height="650"
+                 Fill="#3B82F6"
+                 Opacity="0.08"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 Margin="-220,-220,0,0"/>
 
-            <Grid>
-                <TextBlock Text="Customer List"
-                           FontSize="24"
-                           FontWeight="Bold" Foreground="#FF0C2794"/>
+        <Ellipse Width="500"
+                 Height="500"
+                 Fill="#8B5CF6"
+                 Opacity="0.06"
+                 HorizontalAlignment="Right"
+                 VerticalAlignment="Bottom"
+                 Margin="0,0,-180,-180"/>
 
-                <TextBlock Text="Total: 0 customers"
-                           HorizontalAlignment="Right"
-                           VerticalAlignment="Center"
-                           Foreground="Gray"/>
-            </Grid>
-        </Border>
-
-        <Border Grid.Row="1"
-                Background="AliceBlue"
-                CornerRadius="15"
-                Padding="15"
-                Margin="0,15,0,15"
-                BorderBrush="#B5DCF0"
-                BorderThickness="2">
-
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="18" Opacity="0.25"/>
-            </Border.Effect>
-
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="2*"/>
-                </Grid.ColumnDefinitions>
-
-                <StackPanel>
-                    <TextBlock Text="Search" Margin="0,0,0,5"/>
-                    <TextBox Height="38"
-                             Padding="10"
-                             Text="Search by name or account no..."
-                             Foreground="Gray"
-                             Background="#80FFFFFF"
-                             BorderThickness="0"/>
-                </StackPanel>
-
-                <StackPanel Grid.Column="1" Margin="10,0">
-                    <TextBlock Text="Sort By" Margin="0,0,0,5"/>
-                    <ComboBox Height="35"
-                              Background="WhiteSmoke"
-                              BorderThickness="0">
-                        <ComboBoxItem Content="Name (A-Z)"/>
-                        <ComboBoxItem Content="Name (Z-A)"/>
-                    </ComboBox>
-                </StackPanel>
-
-                <StackPanel Grid.Column="2">
-                    <TextBlock Text="Filter Status" Margin="0,0,0,5"/>
-                    <ComboBox Height="35"
-                              Background="WhiteSmoke"
-                              BorderThickness="0">
-                        <ComboBoxItem Content="All Customers"/>
-                        <ComboBoxItem Content="Active"/>
-                        <ComboBoxItem Content="Overdue"/>
-                    </ComboBox>
-                </StackPanel>
-
-            </Grid>
-        </Border>
-
-        <Border Grid.Row="2"
-                Background="AliceBlue"
-                CornerRadius="15"
-                Padding="10"
-                BorderBrush="#B5DCF0"
+        <Border CornerRadius="28"
+                Padding="30"
+                Background="#CCFFFFFF"
+                BorderBrush="#40FFFFFF"
                 BorderThickness="1">
 
             <Border.Effect>
-                <DropShadowEffect BlurRadius="18" Opacity="0.25"/>
+                <DropShadowEffect BlurRadius="40"
+                                  ShadowDepth="0"
+                                  Opacity="0.18"/>
             </Border.Effect>
 
-            <DataGrid x:Name="myDataGrid"
-                      AutoGenerateColumns="False"
-                      CanUserAddRows="False"
-                      GridLinesVisibility="None"
-                      HeadersVisibility="Column"
-                      RowHeight="45"
-                      Background="AliceBlue"
-                      BorderThickness="0">
+            <StackPanel>
 
-                <DataGrid.RowStyle>
-                    <Style TargetType="DataGridRow">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Margin" Value="0,2"/>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#22FFFFFF"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </DataGrid.RowStyle>
+           
+                <Grid Margin="0,0,0,20">
 
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Account No." Binding="{Binding AccountNo}" Width="*"/>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>
-                    <DataGridTextColumn Header="Address" Binding="{Binding Address}" Width="150"/>
-                    <DataGridTextColumn Header="Contact" Binding="{Binding Contact}" Width="*"/>
-                    <DataGridTextColumn Header="Loan" Binding="{Binding Loan}" Width="*"/>
-                    <DataGridTextColumn Header="Balance" Binding="{Binding Balance}" Width="*"/>
-                    <DataGridTextColumn Header="Daily" Binding="{Binding Daily}" Width="*"/>
-                    <DataGridTextColumn Header="Due Date" Binding="{Binding DueDate}" Width="*"/>
+                    <TextBlock Text="Customer List"
+                               FontSize="30"
+                               FontWeight="SemiBold"
+                               Foreground="#0F172A"/>
 
-                    <DataGridTemplateColumn Header="Status" Width="80">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Border Padding="4"
-                                        CornerRadius="10"
-                                        Background="{Binding StatusColor}">
-                                    <TextBlock Text="{Binding Status}"
-                                               Foreground="White"
-                                               HorizontalAlignment="Center"/>
-                                </Border>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                    <TextBlock Text="Total: 0 customers"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               Foreground="#64748B"
+                               FontSize="13"/>
+                </Grid>
 
-                    <DataGridTemplateColumn Header="Action" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="View Ledger"
-                                        Click="ViewLedger_Click"
-                                        Background="#2563EB"
-                                        Foreground="White"
-                                        Padding="5,2"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+               
+                <Border CornerRadius="18"
+                        Padding="18"
+                        Background="#FFC4EDFB"
+                        BorderBrush="#FF73DAF6"
+                        BorderThickness="1"
+                        Margin="0,0,0,18">
 
-                </DataGrid.Columns>
-            </DataGrid>
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1.5*"/>
+                            <ColumnDefinition Width="1.5*"/>
+                        </Grid.ColumnDefinitions>
+
+                    
+                        <StackPanel Margin="0,0,10,0">
+                            <TextBlock Text="Search"
+                                       Foreground="#334155"
+                                       Margin="0,0,0,6"/>
+
+                            <Border Background="White"
+                                    CornerRadius="12"
+                                    BorderBrush="#E2E8F0"
+                                    BorderThickness="1"
+                                    Padding="8">
+
+                                <TextBox Height="34"
+                                         Text="Search by name or account no..."
+                                         Foreground="Gray"
+                                         BorderThickness="0"
+                                         Background="Transparent"/>
+                            </Border>
+                        </StackPanel>
+
+                     
+                        <StackPanel Grid.Column="1" Margin="10,0">
+                            <TextBlock Text="Sort By"
+                                       Foreground="#334155"
+                                       Margin="0,0,0,6"/>
+
+                            <Border Background="White"
+                                    CornerRadius="12"
+                                    BorderBrush="#E2E8F0"
+                                    BorderThickness="1">
+
+                                <ComboBox Height="38"
+                                          Background="Transparent"
+                                          BorderThickness="0">
+                                    <ComboBoxItem Content="Name (A-Z)"/>
+                                    <ComboBoxItem Content="Name (Z-A)"/>
+                                </ComboBox>
+                            </Border>
+                        </StackPanel>
+
+                      
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Filter Status"
+                                       Foreground="#334155"
+                                       Margin="0,0,0,6"/>
+
+                            <Border Background="White"
+                                    CornerRadius="12"
+                                    BorderBrush="#E2E8F0"
+                                    BorderThickness="1">
+
+                                <ComboBox Height="38"
+                                          Background="Transparent"
+                                          BorderThickness="0">
+                                    <ComboBoxItem Content="All Customers"/>
+                                    <ComboBoxItem Content="Active"/>
+                                    <ComboBoxItem Content="Overdue"/>
+                                </ComboBox>
+                            </Border>
+                        </StackPanel>
+
+                    </Grid>
+                </Border>
+
+            
+                <Border CornerRadius="20"
+                        Padding="12"
+                        Background="#FFDFF0FF"
+                        BorderBrush="#FFDFF0FF"
+                        BorderThickness="1">
+
+                    <DataGrid x:Name="myDataGrid"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              GridLinesVisibility="None"
+                              HeadersVisibility="Column"
+                              RowHeight="45"
+                              Background="Transparent"
+                              BorderThickness="0">
+
+                        <DataGrid.Resources>
+
+                          
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="Background" Value="#F8FAFC"/>
+                                <Setter Property="Foreground" Value="#334155"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                                <Setter Property="Padding" Value="10"/>
+                                <Setter Property="Height" Value="42"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                            </Style>
+
+                         
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Margin" Value="0,2"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#EEF2FF"/>
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+
+                        
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Padding" Value="10"/>
+                            </Style>
+
+                        </DataGrid.Resources>
+
+                        <DataGrid.Columns>
+
+                            <DataGridTextColumn Header="Account No."
+                                                Binding="{Binding AccountNo}"
+                                                Width="*"/>
+
+                            <DataGridTextColumn Header="Name"
+                                                Binding="{Binding Name}"
+                                                Width="2*"/>
+
+                            <DataGridTextColumn Header="Address"
+                                                Binding="{Binding Address}"
+                                                Width="150"/>
+
+                            <DataGridTextColumn Header="Contact"
+                                                Binding="{Binding Contact}"
+                                                Width="*"/>
+
+                            <DataGridTextColumn Header="Loan"
+                                                Binding="{Binding Loan}"
+                                                Width="*"/>
+
+                            <DataGridTextColumn Header="Balance"
+                                                Binding="{Binding Balance}"
+                                                Width="*"/>
+
+                            <DataGridTextColumn Header="Daily"
+                                                Binding="{Binding Daily}"
+                                                Width="*"/>
+
+                            <DataGridTextColumn Header="Due Date"
+                                                Binding="{Binding DueDate}"
+                                                Width="*"/>
+
+                        
+                            <DataGridTemplateColumn Header="Status" Width="90">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+
+                                        <Border Padding="6"
+                                                CornerRadius="10"
+                                                Background="{Binding StatusColor}">
+
+                                            <TextBlock Text="{Binding Status}"
+                                                       Foreground="White"
+                                                       HorizontalAlignment="Center"/>
+                                        </Border>
+
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                        
+                            <DataGridTemplateColumn Header="Action" Width="120">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+
+                                        <Button Content="View Ledger"
+                                                Click="ViewLedger_Click"
+                                                Padding="6,3"
+                                                Foreground="White"
+                                                BorderThickness="0"
+                                                Cursor="Hand">
+
+                                            <Button.Background>
+                                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                    <GradientStop Color="#2563EB" Offset="0"/>
+                                                    <GradientStop Color="#7C3AED" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Button.Background>
+
+                                        </Button>
+
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                </Border>
+
+            </StackPanel>
         </Border>
-
     </Grid>
 </Page>
