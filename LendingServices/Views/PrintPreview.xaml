@@ -4,351 +4,216 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d"
-      d:DesignHeight="500"
-      d:DesignWidth="1200">
+      d:DesignHeight="800"
+      d:DesignWidth="1200"
+      Title="Print Preview">
 
     <Page.Background>
-        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#EEF2FF" Offset="0"/>
-            <GradientStop Color="#F8FAFC" Offset="0.5"/>
-            <GradientStop Color="#E0F2FE" Offset="1"/>
-        </LinearGradientBrush>
+        <SolidColorBrush Color="#F4F9FB"/>
     </Page.Background>
 
-    <Grid Margin="20">
-
-        <Ellipse Width="650"
-                 Height="650"
-                 Fill="#3B82F6"
-                 Opacity="0.08"
-                 HorizontalAlignment="Left"
-                 VerticalAlignment="Top"
-                 Margin="-220,-220,0,0"/>
-
-        <Ellipse Width="500"
-                 Height="500"
-                 Fill="#8B5CF6"
-                 Opacity="0.06"
-                 HorizontalAlignment="Right"
-                 VerticalAlignment="Bottom"
-                 Margin="0,0,-180,-180"/>
-
-        <Border x:Name="printArea"
-                CornerRadius="28"
-                Padding="0"
-                Background="#CCFFFFFF"
-                BorderBrush="#40FFFFFF"
-                BorderThickness="1">
+    <Grid>
+        <Border Width="1150"
+                Margin="20"
+                Padding="30"
+                CornerRadius="25"
+                Background="White"
+                BorderBrush="#B5DCF0"
+                BorderThickness="1.5"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top">
 
             <Border.Effect>
-                <DropShadowEffect BlurRadius="40"
-                                  ShadowDepth="0"
-                                  Opacity="0.18"/>
+                <DropShadowEffect BlurRadius="25" ShadowDepth="0" Opacity="0.12"/>
             </Border.Effect>
 
-            
-            <ScrollViewer VerticalScrollBarVisibility="Auto"
-                          HorizontalScrollBarVisibility="Disabled"
-                          Padding="35">
-
+            <ScrollViewer VerticalScrollBarVisibility="Auto" PanningMode="VerticalOnly">
                 <StackPanel>
 
-                  
                     <Grid Margin="0,0,0,25">
+                        <StackPanel>
+                            <TextBlock Text="Print Preview" 
+                                       FontSize="28" 
+                                       FontWeight="Bold" 
+                                       Foreground="#172554"/>
+                            <TextBlock Text="Review and verify collection sheets before printing" 
+                                       Foreground="#4B5563" 
+                                       FontSize="16" 
+                                       Margin="0,5,0,0"/>
+                        </StackPanel>
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
+                        <Border HorizontalAlignment="Right" VerticalAlignment="Center" 
+                                Background="#E0F2FE" CornerRadius="12" Padding="15,8">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="📅" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="txtDate" 
+                                           FontWeight="SemiBold" 
+                                           Foreground="#1E40AF" 
+                                           VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
 
+                    <Separator Margin="0,0,0,20" Background="#E2E8F0"/>
+
+                    <Border x:Name="printArea" Background="White" Padding="10">
                         <StackPanel>
 
-                            <TextBlock Text="Print Preview"
-                                       FontSize="32"
-                                       FontWeight="SemiBold"
-                                       Foreground="#0F172A"/>
+                            <Grid Margin="0,0,0,25">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
 
-                            <TextBlock Text="Review and print collection report"
-                                       Margin="0,5,0,0"
-                                       FontSize="13"
-                                       Foreground="#64748B"/>
+                                <Border Grid.Column="0" Margin="0,0,12,0" Background="#FAFCFD" BorderBrush="#D8EDF8" BorderThickness="1.5" CornerRadius="20" Padding="15">
+                                    <StackPanel>
+                                        <TextBlock Text="Collection Sheet - Side A" FontSize="15" FontWeight="Bold" Foreground="#5B9FC9" Margin="5,0,0,10"/>
+                                        <DataGrid x:Name="dgLeft"
+                                                  AutoGenerateColumns="False"
+                                                  HeadersVisibility="Column"
+                                                  CanUserAddRows="False"
+                                                  Background="Transparent"
+                                                  BorderThickness="0"
+                                                  GridLinesVisibility="Horizontal"
+                                                  HorizontalGridLinesBrush="#EDF2F7"
+                                                  RowHeight="42"
+                                                  FontSize="14">
+                                            <DataGrid.Resources>
+                                                <Style TargetType="DataGridColumnHeader">
+                                                    <Setter Property="Background" Value="Transparent"/>
+                                                    <Setter Property="Foreground" Value="#4B5563"/>
+                                                    <Setter Property="FontWeight" Value="Bold"/>
+                                                    <Setter Property="Padding" Value="10,8"/>
+                                                    <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                                                    <Setter Property="BorderBrush" Value="#D8EDF8"/>
+                                                </Style>
+                                                <Style TargetType="DataGridCell">
+                                                    <Setter Property="Padding" Value="8"/>
+                                                    <Setter Property="BorderThickness" Value="0"/>
+                                                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                                                </Style>
+                                            </DataGrid.Resources>
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Header="Customer" Binding="{Binding Name}" Width="*"/>
+                                                <DataGridTextColumn Header="Date" Binding="{Binding DailyPayment}" Width="95"/>
+                                                <DataGridTextColumn Header="Amount" Binding="{Binding AmountPaidToday}" Width="110"/>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </StackPanel>
+                                </Border>
+
+                                <Border Grid.Column="1" Margin="12,0,0,0" Background="#FAFCFD" BorderBrush="#D8EDF8" BorderThickness="1.5" CornerRadius="20" Padding="15">
+                                    <StackPanel>
+                                        <TextBlock Text="Collection Sheet - Side B" FontSize="15" FontWeight="Bold" Foreground="#5B9FC9" Margin="5,0,0,10"/>
+                                        <DataGrid x:Name="dgRight"
+                                                  AutoGenerateColumns="False"
+                                                  HeadersVisibility="Column"
+                                                  CanUserAddRows="False"
+                                                  Background="Transparent"
+                                                  BorderThickness="0"
+                                                  GridLinesVisibility="Horizontal"
+                                                  HorizontalGridLinesBrush="#EDF2F7"
+                                                  RowHeight="42"
+                                                  FontSize="14">
+                                            <DataGrid.Resources>
+                                                <Style TargetType="DataGridColumnHeader">
+                                                    <Setter Property="Background" Value="Transparent"/>
+                                                    <Setter Property="Foreground" Value="#4B5563"/>
+                                                    <Setter Property="FontWeight" Value="Bold"/>
+                                                    <Setter Property="Padding" Value="10,8"/>
+                                                    <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                                                    <Setter Property="BorderBrush" Value="#D8EDF8"/>
+                                                </Style>
+                                                <Style TargetType="DataGridCell">
+                                                    <Setter Property="Padding" Value="8"/>
+                                                    <Setter Property="BorderThickness" Value="0"/>
+                                                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                                                </Style>
+                                            </DataGrid.Resources>
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Header="Customer" Binding="{Binding Name}" Width="*"/>
+                                                <DataGridTextColumn Header="Date" Binding="{Binding DailyPayment}" Width="95"/>
+                                                <DataGridTextColumn Header="Amount" Binding="{Binding AmountPaidToday}" Width="110"/>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+
+                            <Grid Margin="0,5,0,35">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border Grid.Column="0" Margin="0,0,10,0" Background="#F8FAFC" BorderBrush="#D8EDF8" BorderThickness="1.5" CornerRadius="18" Padding="15">
+                                    <StackPanel>
+                                        <TextBlock Text="Collectibles" FontSize="13" FontWeight="SemiBold" Foreground="#64748B" HorizontalAlignment="Center"/>
+                                        <TextBlock x:Name="txtCollectibles" FontSize="18" FontWeight="Bold" Foreground="#172554" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <Border Grid.Column="1" Margin="5,0" Background="#FFFEF2F2" BorderBrush="#FFFECACA" BorderThickness="1.5" CornerRadius="18" Padding="15">
+                                    <StackPanel>
+                                        <TextBlock Text="Additional Release" FontSize="13" FontWeight="SemiBold" Foreground="#FF991B1B" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="₱ 0.00" FontSize="18" FontWeight="Bold" Foreground="#FF991B1B" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <Border Grid.Column="2" Margin="10,0,0,0" Background="#E0F2FE" BorderBrush="#B5DCF0" BorderThickness="1.5" CornerRadius="18" Padding="15">
+                                    <StackPanel>
+                                        <TextBlock Text="Net Collection" FontSize="13" FontWeight="SemiBold" Foreground="#1E40AF" HorizontalAlignment="Center"/>
+                                        <TextBlock x:Name="txtNet" FontSize="20" FontWeight="Bold" Foreground="#1E3A8A" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+
+                            <Grid Margin="0,10,0,15">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0">
+                                    <Border Width="240" BorderBrush="#94A3B8" BorderThickness="0,0,0,1" HorizontalAlignment="Center" Margin="0,25,0,0"/>
+                                    <TextBlock Text="Prepared by" Margin="0,8,0,0" HorizontalAlignment="Center" Foreground="#64748B" FontSize="13" FontWeight="Medium"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1">
+                                    <Border Width="240" BorderBrush="#94A3B8" BorderThickness="0,0,0,1" HorizontalAlignment="Center" Margin="0,25,0,0"/>
+                                    <TextBlock Text="Received by" Margin="0,8,0,0" HorizontalAlignment="Center" Foreground="#64748B" FontSize="13" FontWeight="Medium"/>
+                                </StackPanel>
+                            </Grid>
+
                         </StackPanel>
+                    </Border>
 
-                      
-                        <Border Grid.Column="1"
-                                Background="#FF73DAF6"
-                                CornerRadius="14"
-                                Padding="18,10"
-                                BorderBrush="#E2E8F0"
-                                BorderThickness="1"
-                                VerticalAlignment="Top">
+                    <Separator Margin="0,15,0,20" Background="#E2E8F0"/>
 
-                            <TextBlock x:Name="txtDate"
-                                       FontWeight="SemiBold"
-                                       Foreground="#334155"/>
-                        </Border>
-
-                    </Grid>
-
-
-                    
-                    <Grid Margin="0,0,0,25">
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-
-                       
-                        <Border Grid.Column="0"
-                                Margin="0,0,10,0"
-                                CornerRadius="20"
-                                Padding="18"
-                                Background="#FFC4EDFB"
-                                BorderBrush="#FF73DAF6"
-                                BorderThickness="1">
-
-                            <DataGrid x:Name="dgLeft"
-                                      AutoGenerateColumns="False"
-                                      HeadersVisibility="Column"
-                                      CanUserAddRows="False"
-                                      Background="Transparent"
-                                      BorderThickness="0"
-                                      GridLinesVisibility="None"
-                                      RowHeight="40">
-
-                                <DataGrid.Resources>
-
-                                    
-                                    <Style TargetType="DataGridColumnHeader">
-                                        <Setter Property="Background" Value="#F8FAFC"/>
-                                        <Setter Property="Foreground" Value="#334155"/>
-                                        <Setter Property="FontWeight" Value="SemiBold"/>
-                                        <Setter Property="BorderThickness" Value="0"/>
-                                        <Setter Property="Padding" Value="10"/>
-                                        <Setter Property="Height" Value="42"/>
-                                    </Style>
-
-                                    
-                                    <Style TargetType="DataGridCell">
-                                        <Setter Property="BorderThickness" Value="0"/>
-                                        <Setter Property="Padding" Value="10"/>
-                                    </Style>
-
-                                </DataGrid.Resources>
-
-                                <DataGrid.Columns>
-
-                                    <DataGridTextColumn Header="Customer"
-                                                        Binding="{Binding Name}"
-                                                        Width="*"/>
-
-                                    <DataGridTextColumn Header="Date"
-                                                        Binding="{Binding DailyPayment}"
-                                                        Width="90"/>
-
-                                    <DataGridTextColumn Header="Amount"
-                                                        Binding="{Binding AmountPaidToday}"
-                                                        Width="130"/>
-
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </Border>
-
-
-                        
-                        <Border Grid.Column="1"
-                                Margin="10,0,0,0"
-                                CornerRadius="20"
-                                Padding="18"
-                                Background="#FFC4EDFB"
-                                BorderBrush="#FF73DAF6"
-                                BorderThickness="1">
-
-                            <DataGrid x:Name="dgRight"
-                                      AutoGenerateColumns="False"
-                                      HeadersVisibility="Column"
-                                      CanUserAddRows="False"
-                                      Background="Transparent"
-                                      BorderThickness="0"
-                                      GridLinesVisibility="None"
-                                      RowHeight="40">
-
-                                <DataGrid.Resources>
-
-                                    <Style TargetType="DataGridColumnHeader">
-                                        <Setter Property="Background" Value="#F8FAFC"/>
-                                        <Setter Property="Foreground" Value="#334155"/>
-                                        <Setter Property="FontWeight" Value="SemiBold"/>
-                                        <Setter Property="BorderThickness" Value="0"/>
-                                        <Setter Property="Padding" Value="10"/>
-                                        <Setter Property="Height" Value="42"/>
-                                    </Style>
-
-                                    <Style TargetType="DataGridCell">
-                                        <Setter Property="BorderThickness" Value="0"/>
-                                        <Setter Property="Padding" Value="10"/>
-                                    </Style>
-
-                                </DataGrid.Resources>
-
-                                <DataGrid.Columns>
-
-                                    <DataGridTextColumn Header="Customer"
-                                                        Binding="{Binding Name}"
-                                                        Width="*"/>
-
-                                    <DataGridTextColumn Header="Date"
-                                                        Binding="{Binding DailyPayment}"
-                                                        Width="90"/>
-
-                                    <DataGridTextColumn Header="Amount"
-                                                        Binding="{Binding AmountPaidToday}"
-                                                        Width="130"/>
-
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </Border>
-
-                    </Grid>
-
-
-                  
-                    <Grid Margin="0,0,0,30">
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-
-                        
-                        <Border Grid.Column="0"
-                                Margin="0,0,10,0"
-                                Background="#FFEDFCFC"
-                                CornerRadius="18"
-                                Padding="20"
-                                BorderBrush="#FF7BDAEE"
-                                BorderThickness="1">
-
-                            <StackPanel>
-
-                                <TextBlock Text="Collectibles"
-                                           FontSize="13"
-                                           Foreground="#64748B"/>
-
-                                <TextBlock x:Name="txtCollectibles"
-                                           Margin="0,8,0,0"
-                                           FontSize="22"
-                                           FontWeight="Bold"
-                                           Foreground="#2563EB"/>
-                            </StackPanel>
-                        </Border>
-
-                        <!-- Additional -->
-                        <Border Grid.Column="1"
-                                Margin="5,0"
-                                Background="#FFE9FEE5"
-                                CornerRadius="18"
-                                Padding="20"
-                                BorderBrush="#FF6AF98A"
-                                BorderThickness="1">
-
-                            <StackPanel>
-
-                                <TextBlock Text="Additional Release"
-                                           FontSize="13"
-                                           Foreground="#64748B"/>
-
-                                <TextBlock Text="₱ 0.00"
-                                           Margin="0,8,0,0"
-                                           FontSize="22"
-                                           FontWeight="Bold"
-                                           Foreground="#10B981"/>
-                            </StackPanel>
-                        </Border>
-
-                       
-                        <Border Grid.Column="2"
-                                Margin="10,0,0,0"
-                                Background="#FFFAECFB"
-                                CornerRadius="18"
-                                Padding="20"
-                                BorderBrush="#FFC35DF3"
-                                BorderThickness="1">
-
-                            <StackPanel>
-
-                                <TextBlock Text="Net Collection"
-                                           FontSize="13"
-                                           Foreground="#64748B"/>
-
-                                <TextBlock x:Name="txtNet"
-                                           Margin="0,8,0,0"
-                                           FontSize="22"
-                                           FontWeight="Bold"
-                                           Foreground="#F59E0B"/>
-                            </StackPanel>
-                        </Border>
-                    </Grid>
-
-
-                    
-                    <Grid Margin="0,15,0,35">
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-
-                       
-                        <StackPanel>
-
-                            <Border Width="260"
-                                    BorderBrush="#64748B"
-                                    BorderThickness="0,0,0,1"
-                                    HorizontalAlignment="Center"/>
-
-                            <TextBlock Text="Prepared by"
-                                       Margin="0,8,0,0"
-                                       HorizontalAlignment="Center"
-                                       Foreground="#64748B"/>
-                        </StackPanel>
-
-                        <StackPanel Grid.Column="1">
-
-                            <Border Width="260"
-                                    BorderBrush="#64748B"
-                                    BorderThickness="0,0,0,1"
-                                    HorizontalAlignment="Center"/>
-
-                            <TextBlock Text="Received by"
-                                       Margin="0,8,0,0"
-                                       HorizontalAlignment="Center"
-                                       Foreground="#64748B"/>
-                        </StackPanel>
-                    </Grid>
-
-
-                    
-                    <Button Content="Print Report"
-                            Width="180"
-                            Height="48"
-                            HorizontalAlignment="Left"
-                            Foreground="White"
-                            FontWeight="SemiBold"
-                            BorderThickness="0"
-                            Cursor="Hand"
-                            Click="PrintNow_Click">
-
-                        <Button.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#2563EB" Offset="0"/>
-                                <GradientStop Color="#7C3AED" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Button.Background>
-
-                    </Button>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Content="Print Report" 
+                                Width="180" 
+                                Height="48" 
+                                Background="#172554" 
+                                Foreground="White" 
+                                FontSize="16" 
+                                FontWeight="SemiBold" 
+                                BorderThickness="0" 
+                                Cursor="Hand" 
+                                Click="PrintNow_Click">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" CornerRadius="12">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <TextBlock Text="🖨️" FontSize="16" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                            <ContentPresenter VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
 
                 </StackPanel>
             </ScrollViewer>

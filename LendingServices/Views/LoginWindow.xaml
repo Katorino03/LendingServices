@@ -35,31 +35,35 @@
 
                 <Border Background="#D8EDF8"
                         CornerRadius="20,20,20,20"
-                        Padding="30" Margin="0,0,13,0">
+                        Padding="30" Margin="0,0,10,0">
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
 
                         <Border Width="90" Height="90"
-                                Background="#99FFFFFF"
+                                Background="White"
                                 CornerRadius="20"
                                 HorizontalAlignment="Center">
                             <Border.Effect>
                                 <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.2"/>
                             </Border.Effect>
-                            <Image Source="/Images/AngCoolLogo.png" 
-                                   Stretch="Uniform" 
-                                   Margin="-11,-11,-11,-11"/>
+                            <Image Source="/Images/AngCoolLogo.png"
+                                   RenderOptions.BitmapScalingMode="HighQuality"
+                                   RenderOptions.EdgeMode="Aliased"
+                                    Margin="1" 
+                                    Stretch="Uniform"/>
                         </Border>
 
 
                         <TextBlock Text="Ang Cool"
-                                   FontSize="28"
-                                   FontWeight="Bold"
+                                   FontSize="32"
                                    Foreground="#172554"
-                                   HorizontalAlignment="Center"/>
-                        <TextBlock Text="Lending Services"
-                                   FontSize="18"
-                                   Foreground="#4B5563"
-                                   HorizontalAlignment="Center"/>
+                                   HorizontalAlignment="Center" FontWeight="Black"/>
+                        <Border Background="#172554" CornerRadius="6" Padding="12,4" Margin="0,8,0,0" HorizontalAlignment="Center">
+                            <TextBlock Text="LENDING SERVICES"
+                                   FontSize="11"
+                                   Foreground="White"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Center" Background="#172554"/>
+                        </Border>
                     </StackPanel>
                 </Border>
 

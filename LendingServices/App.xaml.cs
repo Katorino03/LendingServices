@@ -26,7 +26,8 @@ namespace LendingServices
                     services.AddTransient<ILoanRepository, LoanRepository>();
                     services.AddTransient<DailyCollectionViewModel>();
                     services.AddTransient<AddCustomerViewModel>();
-                    services.AddTransient<CustomerListViewModel>(); 
+                    services.AddTransient<CustomerListViewModel>();
+                    services.AddTransient<BorrowerCopyViewModel>();
                     services.AddTransient<LoginWindow>();
                     services.AddTransient<CustomerList>();
                     services.AddScoped<IUserRepository, UserRepository>();
