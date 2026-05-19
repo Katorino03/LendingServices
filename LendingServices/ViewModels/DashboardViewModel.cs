@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using System.Collections.ObjectModel;
 
 namespace LendingServices.ViewModels
 {
@@ -23,6 +26,12 @@ namespace LendingServices.ViewModels
 
         [ObservableProperty]
         private decimal _dailyReceipts;
+
+        [ObservableProperty]
+        private ObservableCollection<ISeries> _receiptsSeries = new();
+
+        [ObservableProperty]
+        private ObservableCollection<Axis> _xAxes = new();
 
         public DashboardViewModel(AngCoolDbContext context)
         {
@@ -63,6 +72,41 @@ namespace LendingServices.ViewModels
                 DailyReceipts = await _context.Payments
                     .Where(p => p.PaymentDate >= startOfDay && p.PaymentDate <= endOfDay)
                     .SumAsync(p => p.AmountPaid);
+
+                // Load Chart Data (Past 7 days)
+                var last7Days = Enumerable.Range(0, 7).Select(offset => today.AddDays(-6 + offset)).ToList();
+                var chartData = new double[7];
+                var labels = new string[7];
+
+                for (int i = 0; i < 7; i++)
+                {
+                    var dayStart = last7Days[i];
+                    var dayEnd = dayStart.AddDays(1).AddTicks(-1);
+                    var dailySum = await _context.Payments
+                        .Where(p => p.PaymentDate >= dayStart && p.PaymentDate <= dayEnd)
+                        .SumAsync(p => p.AmountPaid);
+
+                    chartData[i] = (double)dailySum;
+                    labels[i] = dayStart.ToString("ddd"); // Mon, Tue, etc.
+                }
+
+                ReceiptsSeries = new ObservableCollection<ISeries>
+                {
+                    new LineSeries<double>
+                    {
+                        Values = chartData,
+                        Fill = null,
+                        Name = "Daily Receipts"
+                    }
+                };
+
+                XAxes = new ObservableCollection<Axis>
+                {
+                    new Axis
+                    {
+                        Labels = labels
+                    }
+                };
             }
             catch (Exception ex)
             {
