@@ -12,5 +12,9 @@ namespace LendingServices.Repositories
         Task AddNewCustomerAndLoanAsync(Customer customer, Loan loan);
         Task<List<CustomerListItemDTO>> GetCustomerListAsync();
         Task SaveDailySummaryAsync(DateTime date, decimal totalCollection, decimal expenses, decimal additionalRelease, decimal netCollection);
+        Task<List<CustomerLookupDTO>> GetActiveCustomersLookupAsync();
+        Task<LoanDetailsDTO> GetActiveLoanDetailsAsync(int customerId);
+        Task<List<LedgerItemDTO>> GetLoanLedgerAsync(int loanId);
+
     }
 }
