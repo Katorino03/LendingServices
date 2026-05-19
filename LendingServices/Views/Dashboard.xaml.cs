@@ -1,24 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
+﻿using Microsoft.Extensions.DependencyInjection;
+using LendingServices.ViewModels;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace LendingServices.Views
 {
-
     public partial class Dashboard : Page
     {
+        private readonly DashboardViewModel _viewModel;
+
         public Dashboard()
         {
             InitializeComponent();
+
+            _viewModel = App.ServiceProvider.GetRequiredService<DashboardViewModel>();
+            DataContext = _viewModel;
+
+            this.Loaded += async (s, e) => await _viewModel.LoadDataAsync();
         }
     }
 }

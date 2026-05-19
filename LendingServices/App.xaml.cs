@@ -27,6 +27,7 @@ namespace LendingServices
                     services.AddTransient<DailyCollectionViewModel>();
                     services.AddTransient<AddCustomerViewModel>();
                     services.AddTransient<CustomerListViewModel>();
+                    services.AddTransient<DashboardViewModel>();
                     services.AddTransient<BorrowerCopyViewModel>();
                     services.AddTransient<LoginWindow>();
                     services.AddTransient<CustomerList>();
@@ -43,11 +44,29 @@ namespace LendingServices
 
             using (var scope = _host.Services.CreateScope())
             {
+                // This after debug but still error
+
                 var dbContext = scope.ServiceProvider.GetRequiredService<AngCoolDbContext>();
-                await dbContext.Database.MigrateAsync();
+
+                try
+                {
+                    await dbContext.Database.MigrateAsync();
+                }
+                catch (Microsoft.Data.Sqlite.SqliteException ex) when (ex.Message.Contains("already exists"))
+                {
+                    // The database tables already exist but the EF Migrations history is out of sync.
+                    System.Diagnostics.Debug.WriteLine($"Migration skipped: {ex.Message}");
+                }
 
                 var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
                 await EnsureDefaultAdminExists(userRepository);
+
+                // Original code without try-catch
+                //var dbContext = scope.ServiceProvider.GetRequiredService<AngCoolDbContext>();
+                //await dbContext.Database.MigrateAsync();
+
+                //var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
+                //await EnsureDefaultAdminExists(userRepository);
             }
 
             var loginWindow = _host.Services.GetRequiredService<LoginWindow>();
