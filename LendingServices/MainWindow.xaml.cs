@@ -17,6 +17,14 @@ namespace LendingServices
 
         }
 
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            LoginWindow login = new LoginWindow();
+            login.Show();
+
+            this.Close();
+        }
+
         private void Dashboard_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Navigate(new Dashboard());

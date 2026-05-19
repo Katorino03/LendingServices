@@ -57,12 +57,7 @@
 
                 <Grid Margin="0,0,0,20">
 
-                    <TextBlock Text="Customer List"
-                               FontSize="30"
-                               FontWeight="SemiBold"
-                               Foreground="#0F172A"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Center"/>
+                   
 
                     <StackPanel Orientation="Horizontal" 
                                 HorizontalAlignment="Right" 
@@ -116,8 +111,8 @@
 
                 <Border CornerRadius="18"
                         Padding="18"
-                        Background="#FFC4EDFB"
-                        BorderBrush="#FF73DAF6"
+                        Background="#FFD5E9FB"
+                        BorderBrush="#FF93CFF8"
                         BorderThickness="1"
                         Margin="0,0,0,18">
 

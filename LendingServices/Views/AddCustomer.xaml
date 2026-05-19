@@ -2,6 +2,7 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      
       Title="AddCustomer">
 
     <Page.Background>
@@ -47,11 +48,6 @@
             <ScrollViewer VerticalScrollBarVisibility="Auto">
 
                 <StackPanel>
-
-                    <TextBlock Text="Add New Customer"
-                               FontSize="30"
-                               FontWeight="SemiBold"
-                               Foreground="#0F172A"/>
 
                     <TextBlock Text="Create a loan profile and customer record"
                                Margin="0,5,0,25"

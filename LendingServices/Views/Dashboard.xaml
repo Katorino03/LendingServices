@@ -15,9 +15,7 @@
             <RowDefinition Height="320*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Dashboard Overview"
-                   FontSize="24"
-                   FontWeight="Bold" Foreground="#FF0C2794"/>
+       
 
         <UniformGrid Grid.Row="2" Columns="4" Margin="0,0,0,20">
 
@@ -40,25 +38,25 @@
             <Border>
                 <StackPanel>
                     <TextBlock Text="Total Outstanding" FontSize = "15" Foreground="Gray" FontWeight="SemiBold"/>
-                    <TextBlock Text="₱00,000" FontSize="30"  FontWeight="Bold"/>
+                    <TextBlock Text="₱00,000" FontSize="30"  FontWeight="Bold" Foreground="#FF61C6E8"/>
                 </StackPanel>
             </Border>
 
-            <Border>
+            <Border BorderBrush="#FFFB9393">
                 <StackPanel>
                     <TextBlock Text="Overdue Customers" FontSize = "15" Foreground="Gray" FontWeight="SemiBold"/>
                     <TextBlock Text="0" FontSize="30" Foreground="Red" FontWeight="Bold"/>
                 </StackPanel>
             </Border>
 
-            <Border>
+            <Border BorderBrush="#FFFCF09F">
                 <StackPanel>
                     <TextBlock Text="Due This Week" FontSize = "15" Foreground="Gray" FontWeight="SemiBold"/>
                     <TextBlock Text="0" FontSize="30" Foreground="#F59E0B" FontWeight="Bold"/>
                 </StackPanel>
             </Border>
 
-            <Border>
+            <Border BorderBrush="#FFB1F6B9">
                 <StackPanel>
                     <TextBlock Text="Daily Receipts" FontSize = "15" Foreground="Gray" FontWeight="SemiBold"/>
                     <TextBlock Text="₱00,000" FontSize="30" Foreground="Green" FontWeight="Bold"/>
@@ -77,8 +75,8 @@
                     Padding="15"
                     CornerRadius="15"
                     Background="AliceBlue"
-                    BorderBrush="#B5DCF0"
-                    BorderThickness="1">
+                    BorderBrush="#FFF18F89"
+                    BorderThickness="2">
 
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="15" Opacity="0.2"/>
@@ -97,8 +95,8 @@
                     Padding="15"
                     CornerRadius="15"
                     Background="AliceBlue"
-                    BorderBrush="#B5DCF0"
-                    BorderThickness="1">
+                    BorderBrush="#FFA9D9F1"
+                    BorderThickness="2">
 
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="15" Opacity="0.2"/>
@@ -106,7 +104,7 @@
 
                 <StackPanel>
                     <TextBlock Text="Daily Reciept" FontSize = "20" FontWeight="Bold"/>
-                    <TextBlock Text="(Bar and line charts for visualizing daily reciept" FontSize = "15" Foreground="Gray"/>
+                    <TextBlock Text="(Bar and line charts for visualizing daily reciept, use livechart.wpf" FontSize = "15" Foreground="Gray"/>
                 </StackPanel>
             </Border>
 

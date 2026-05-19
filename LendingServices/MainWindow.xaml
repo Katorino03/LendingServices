@@ -26,15 +26,8 @@
             <TextBlock Text="Manage customers, balances, and daily receipts" FontSize = "18" Foreground="Gray"/>
         </StackPanel>
 
-        <Border Grid.Row="1"
-                Panel.ZIndex="1"
-                CornerRadius="15"
-                Padding="10"
-                Margin="0,20,0,20"
-                Background="#66FFFFFF"
-                BorderBrush="#40FFFFFF"
-                BorderThickness="1">
-
+        <Border Grid.Row="1" Panel.ZIndex="1" CornerRadius="15" Padding="10" Margin="0,20,0,20"
+        Background="#66FFFFFF" BorderBrush="#40FFFFFF" BorderThickness="1">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="15" Opacity="0.2"/>
             </Border.Effect>
@@ -47,6 +40,7 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
 
@@ -89,6 +83,54 @@
                 <Button x:Name="btnAddCustomer" Grid.Column="2" Content="Add Customer" Click="AddCustomer_Click" FontSize="18" FontWeight="SemiBold"/>
                 <Button x:Name="btnDailyCollection" Grid.Column="3" Content="Daily Collection" Click="DailyCollection_Click" FontSize="18" FontWeight="SemiBold"/>
                 <Button x:Name="btnBorrowerCopy" Grid.Column="4" Content="Borrower Copy" Click="BorrowerCopy_Click" FontSize="18" FontWeight="SemiBold"/>
+                <Button x:Name="btnLogout"
+                            Grid.Column="6"
+                            Content="[->Logout"
+                            Click="Logout_Click"
+                            FontSize="18"
+                            FontWeight="SemiBold"
+                            Foreground="White"
+                            Background="Red"
+                            BorderThickness="0"
+                            Padding="18,8"
+                            Margin="10,0"
+                            Cursor="Hand">  
+
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="12"
+                                Padding="{TemplateBinding Padding}">
+                                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                                        </Border>
+
+                                        <ControlTemplate.Triggers>
+
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="border"
+                                        Property="Background"
+                                        Value="#DC2626"/>
+                                            </Trigger>
+
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="border"
+                                        Property="Background"
+                                        Value="Red"/>
+                                            </Trigger>
+
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+
+                </Button>
             </Grid>
         </Border>
 
