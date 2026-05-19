@@ -5,12 +5,14 @@
         Width="720"
         Height="480"
         WindowStartupLocation="CenterScreen"
+        FocusManager.FocusedElement="{Binding ElementName=txtUsername}"
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent">
 
+
     <Grid>
-        
+
         <Border CornerRadius="25"
                 Background="White"
                 BorderBrush="#B5DCF0"
@@ -30,12 +32,12 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-               
+
                 <Border Background="#D8EDF8"
                         CornerRadius="20,20,20,20"
                         Padding="30" Margin="0,0,13,0">
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                        
+
                         <Border Width="90" Height="90"
                                 Background="#99FFFFFF"
                                 CornerRadius="20"
@@ -43,14 +45,12 @@
                             <Border.Effect>
                                 <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.2"/>
                             </Border.Effect>
-                            <TextBlock Text=" "
-                                       FontSize="40"
-                                       Foreground="#5B9FC9"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"/>
+                            <Image Source="/Images/AngCoolLogo.png" 
+                                   Stretch="Uniform" 
+                                   Margin="-11,-11,-11,-11"/>
                         </Border>
 
-                        
+
                         <TextBlock Text="Ang Cool"
                                    FontSize="28"
                                    FontWeight="Bold"
@@ -63,28 +63,30 @@
                     </StackPanel>
                 </Border>
 
-                
+
                 <StackPanel Grid.Column="1"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             Width="280"
                            >
 
-                   
+
                     <TextBlock Text="Welcome Back!"
                                FontSize="22"
                                FontWeight="Bold"
                                Foreground="#172554"
-                               HorizontalAlignment="Center"/>
+                               HorizontalAlignment="Center"
+                               Margin="0,20,0,0"/>
                     <TextBlock Text="Sign in to continue"
                                FontSize="14"
                                Foreground="#4B5563"
                                HorizontalAlignment="Center"/>
 
-                   
+
                     <TextBlock Text="Username"
                                FontSize="14"
-                               FontWeight="SemiBold"/>
+                               FontWeight="SemiBold"
+                               Margin="0,25,0,8"/>
                     <Border Background="#40FFFFFF"
                             BorderBrush="#B5DCF0"
                             BorderThickness="1.5"
@@ -110,33 +112,39 @@
                         </Grid>
                     </Border>
 
-                    
+
                     <TextBlock Text="Password"
                                FontSize="14"
-                               FontWeight="SemiBold"/>
-                    <Border Background="#40FFFFFF"
-                            BorderBrush="#B5DCF0"
-                            BorderThickness="1.5"
-                            CornerRadius="12"
-                            Height="40">
+                               FontWeight="SemiBold"
+                               Margin="0,15,0,8"/>
+                    <Border Background="#40FFFFFF" BorderBrush="#B5DCF0" BorderThickness="1.5" CornerRadius="12" Height="40">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="35"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="35"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="🔐"
-                                       FontSize="16"
-                                       Foreground="#5B9FC9"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"/>
+
+                            <TextBlock Text="🔐" FontSize="16" Foreground="#5B9FC9" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                            <TextBox x:Name="txtPasswordReveal"
+                                     Grid.Column="1"
+                                     Visibility="Collapsed" 
+                                     BorderThickness="0"
+                                     Background="Transparent"
+                                     FontSize="14"
+                                     VerticalContentAlignment="Center"/>
+
                             <PasswordBox x:Name="txtPassword"
                                          Grid.Column="1"
+                                         Visibility="Visible"
                                          BorderThickness="0"
                                          Background="Transparent"
                                          FontSize="14"
                                          VerticalContentAlignment="Center"/>
-                            <Button Grid.Column="2"
+
+                            <Button x:Name="btnShowPassword"
+                                    Grid.Column="2"
                                     Content="👁"
                                     FontSize="12"
                                     Background="Transparent"
@@ -146,7 +154,7 @@
                         </Grid>
                     </Border>
 
-                    
+
                     <Button Height="45"
                             Background="#5B9FC9"
                             Foreground="White"
@@ -154,6 +162,7 @@
                             FontWeight="Bold"
                             BorderThickness="0"
                             Cursor="Hand"
+                            IsDefault="True"
                             Click="Login_Click"
                             Margin="0,10,0,0">
                         <Button.Template>
@@ -171,7 +180,24 @@
                         </StackPanel>
                     </Button>
 
+                    <TextBlock Margin="0,15,0,0" HorizontalAlignment="Center">
+                            <Hyperlink Foreground="#5B9FC9" Click="ForgotPassword_Click" TextDecorations="None">
+                                Forgot Password?
+                            </Hyperlink>
+                    </TextBlock>
+
                 </StackPanel>
+                <Button HorizontalAlignment="Right" 
+                        VerticalAlignment="Top" 
+                        Content="✕" 
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="#9CA3AF" 
+                        Background="Transparent" 
+                        BorderThickness="0" 
+                        Cursor="Hand"
+                        Margin="0,-10,0,0"
+                        Click="CloseButton_Click" Grid.Column="1"/>
             </Grid>
         </Border>
     </Grid>

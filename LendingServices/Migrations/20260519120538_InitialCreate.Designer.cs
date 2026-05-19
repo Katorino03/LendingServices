@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LendingServices.Migrations
 {
     [DbContext(typeof(AngCoolDbContext))]
-    [Migration("20260518085404_AddCustomerAddress")]
-    partial class AddCustomerAddress
+    [Migration("20260519120538_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -86,8 +86,14 @@ namespace LendingServices.Migrations
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("TEXT");
 
+                    b.Property<double>("InterestRate")
+                        .HasColumnType("REAL");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("LoanType")
+                        .HasColumnType("TEXT");
 
                     b.Property<decimal>("PrincipalAmount")
                         .HasColumnType("TEXT");
@@ -129,6 +135,37 @@ namespace LendingServices.Migrations
                     b.HasIndex("LoanId");
 
                     b.ToTable("Payments");
+                });
+
+            modelBuilder.Entity("LendingServices.Models.UserAccount", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SecurityAnswer")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SecurityQuestion")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserAccounts");
                 });
 
             modelBuilder.Entity("LendingServices.Models.Loan", b =>

@@ -19,6 +19,7 @@ namespace LendingServices.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     AccountNo = table.Column<string>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Address = table.Column<string>(type: "TEXT", nullable: false),
                     ContactNo = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -42,6 +43,23 @@ namespace LendingServices.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserAccounts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    FullName = table.Column<string>(type: "TEXT", nullable: false),
+                    Username = table.Column<string>(type: "TEXT", nullable: false),
+                    Password = table.Column<string>(type: "TEXT", nullable: false),
+                    SecurityQuestion = table.Column<string>(type: "TEXT", nullable: false),
+                    SecurityAnswer = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserAccounts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Loans",
                 columns: table => new
                 {
@@ -54,7 +72,9 @@ namespace LendingServices.Migrations
                     TotalAmountToPay = table.Column<decimal>(type: "TEXT", nullable: false),
                     DailyPayment = table.Column<decimal>(type: "TEXT", nullable: false),
                     TermsInDays = table.Column<int>(type: "INTEGER", nullable: false),
-                    IsActive = table.Column<bool>(type: "INTEGER", nullable: false)
+                    IsActive = table.Column<bool>(type: "INTEGER", nullable: false),
+                    LoanType = table.Column<string>(type: "TEXT", nullable: true),
+                    InterestRate = table.Column<double>(type: "REAL", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -108,6 +128,9 @@ namespace LendingServices.Migrations
 
             migrationBuilder.DropTable(
                 name: "Payments");
+
+            migrationBuilder.DropTable(
+                name: "UserAccounts");
 
             migrationBuilder.DropTable(
                 name: "Loans");

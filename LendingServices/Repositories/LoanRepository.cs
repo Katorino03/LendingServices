@@ -20,7 +20,7 @@ namespace LendingServices.Repositories
             return await _context.Loans
                 .Include(l => l.Customer)
                 .Include(l => l.Payments)
-                .Where(l => l.IsActive)
+                .Where(l => l.IsActive || l.LoanType == "Overdue")
                 .Select(l => new DailyCollectionDTO
                 {
                     CustomerId = l.Customer.Id,
@@ -91,6 +91,34 @@ namespace LendingServices.Repositories
                     LoanTag = l.LoanType
                 })
                 .ToListAsync();
+        }
+
+        public async Task SaveDailySummaryAsync(DateTime date, decimal totalCollection, decimal expenses, decimal additionalRelease, decimal netCollection)
+        {
+            var existingSummary = await _context.DailySummaries
+                .FirstOrDefaultAsync(s => s.SummaryDate.Date == date.Date);
+
+            if (existingSummary != null)
+            {
+                existingSummary.TotalCollection += totalCollection;
+                existingSummary.Expenses += expenses;
+                existingSummary.AdditionalRelease += additionalRelease;
+                existingSummary.NetCollection += netCollection;
+            }
+            else
+            {
+                var newSummary = new DailySummary
+                {
+                    SummaryDate = date.Date,
+                    TotalCollection = totalCollection,
+                    Expenses = expenses,
+                    AdditionalRelease = additionalRelease,
+                    NetCollection = netCollection
+                };
+                await _context.DailySummaries.AddAsync(newSummary);
+            }
+
+            await _context.SaveChangesAsync();
         }
     }
 }

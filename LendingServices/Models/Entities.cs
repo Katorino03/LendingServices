@@ -28,7 +28,7 @@ namespace LendingServices.Models
 
         public bool IsActive { get; set; } = true;
         public string? LoanType { get; set; }
-
+        public double InterestRate { get; set; }
         public Customer Customer { get; set; } = null!;
         public ICollection<Payment> Payments { get; set; } = new List<Payment>();
     }

@@ -1,12 +1,13 @@
-﻿using System;
-using LendingServices.Data;
+﻿using LendingServices.Data;
+using LendingServices.Models;
 using LendingServices.Repositories;
+using LendingServices.ViewModels;
+using LendingServices.Views;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using System.Windows;
-using LendingServices.ViewModels;
-using LendingServices.Views;
 
 namespace LendingServices
 {
@@ -28,6 +29,7 @@ namespace LendingServices
                     services.AddTransient<CustomerListViewModel>(); 
                     services.AddTransient<LoginWindow>();
                     services.AddTransient<CustomerList>();
+                    services.AddScoped<IUserRepository, UserRepository>();
                 })
                 .Build();
 
@@ -40,14 +42,34 @@ namespace LendingServices
 
             using (var scope = _host.Services.CreateScope())
             {
-                // var dbContext = scope.ServiceProvider.GetRequiredService<AngCoolDbContext>();
-                // await dbContext.Database.MigrateAsync();
+                var dbContext = scope.ServiceProvider.GetRequiredService<AngCoolDbContext>();
+                await dbContext.Database.MigrateAsync();
+
+                var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
+                await EnsureDefaultAdminExists(userRepository);
             }
 
             var loginWindow = _host.Services.GetRequiredService<LoginWindow>();
             loginWindow.Show();
 
             base.OnStartup(e);
+        }
+
+        private async Task EnsureDefaultAdminExists(IUserRepository userRepository)
+        {
+            if (!await userRepository.HasAnyUsersAsync())
+            {
+                var defaultAdmin = new UserAccount
+                {
+                    FullName = "Admin User",
+                    Username = "admin",
+                    Password = "password123",
+                    SecurityQuestion = "What is the name of this app?",
+                    SecurityAnswer = "Ang Cool"
+                };
+
+                await userRepository.AddUserAsync(defaultAdmin);
+            }
         }
 
         protected override async void OnExit(ExitEventArgs e)

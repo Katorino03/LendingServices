@@ -65,6 +65,32 @@ namespace LendingServices.Migrations
                     b.ToTable("DailyExpenses");
                 });
 
+            modelBuilder.Entity("LendingServices.Models.DailySummary", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("AdditionalRelease")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("Expenses")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("NetCollection")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("SummaryDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("TotalCollection")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DailySummaries");
+                });
+
             modelBuilder.Entity("LendingServices.Models.Loan", b =>
                 {
                     b.Property<int>("Id")
@@ -82,6 +108,9 @@ namespace LendingServices.Migrations
 
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("TEXT");
+
+                    b.Property<double>("InterestRate")
+                        .HasColumnType("REAL");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("INTEGER");
@@ -129,6 +158,37 @@ namespace LendingServices.Migrations
                     b.HasIndex("LoanId");
 
                     b.ToTable("Payments");
+                });
+
+            modelBuilder.Entity("LendingServices.Models.UserAccount", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SecurityAnswer")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SecurityQuestion")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserAccounts");
                 });
 
             modelBuilder.Entity("LendingServices.Models.Loan", b =>

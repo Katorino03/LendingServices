@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +24,30 @@ namespace LendingServices.ViewModels
 
         [ObservableProperty]
         private decimal _netCollection;
+
+        [ObservableProperty]
+        private decimal _additionalRelease;
+
+        [ObservableProperty]
+        private decimal _expenses;
+
+        [ObservableProperty]
+        private decimal _additionalReleaseInput;
+
+        partial void OnAdditionalReleaseInputChanged(decimal value)
+        {
+            AdditionalRelease = value;
+            ComputeTotals();
+        }
+
+        [ObservableProperty]
+        private decimal _expensesInput;
+
+        partial void OnExpensesInputChanged(decimal value)
+        {
+            Expenses = value;
+            ComputeTotals();
+        }
 
         public DailyCollectionViewModel(ILoanRepository loanRepository)
         {
@@ -53,7 +78,7 @@ namespace LendingServices.ViewModels
         {
             TotalCollectibles = Customers.Sum(c => c.DailyPayment);
             TotalCollection = Customers.Sum(c => c.AmountPaidToday);
-            NetCollection = TotalCollection;
+            NetCollection = TotalCollection - Expenses - AdditionalRelease;
         }
 
         [RelayCommand]
@@ -63,8 +88,16 @@ namespace LendingServices.ViewModels
             {
                 await _loanRepository.SaveDailyCollectionsAsync(Customers);
 
-                MessageBox.Show("Daily collection recorded successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                await _loanRepository.SaveDailySummaryAsync(
+                    DateTime.Now,
+                    TotalCollection,
+                    Expenses,
+                    AdditionalRelease,
+                    NetCollection);
 
+                MessageBox.Show("Daily collection and summary recorded successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                ClearAll();
                 await LoadDataAsync();
             }
             catch (Exception ex)
@@ -80,6 +113,9 @@ namespace LendingServices.ViewModels
             {
                 c.AmountPaidToday = 0;
             }
+
+            AdditionalReleaseInput = 0;
+            ExpensesInput = 0;
         }
     }
 }

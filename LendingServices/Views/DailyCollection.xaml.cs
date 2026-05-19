@@ -16,12 +16,22 @@ namespace LendingServices.Views
             _viewModel = App.ServiceProvider.GetRequiredService<DailyCollectionViewModel>();
             DataContext = _viewModel;
 
-            this.Loaded += DailyCollection_Loaded;
+            this.Loaded += async (s, e) => await RefreshData();
+
+            this.IsVisibleChanged += async (s, e) => {
+                if (this.Visibility == Visibility.Visible)
+                {
+                    await RefreshData();
+                }
+            };
         }
 
-        private async void DailyCollection_Loaded(object sender, RoutedEventArgs e)
+        private async Task RefreshData()
         {
-            await _viewModel.LoadDataAsync();
+            if (_viewModel != null)
+            {
+                await _viewModel.LoadDataAsync();
+            }
         }
 
         private void PreviewPrint_Click(object sender, RoutedEventArgs e)

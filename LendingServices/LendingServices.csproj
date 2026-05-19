@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\AngCoolLogo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Resources\" />
   </ItemGroup>
 
@@ -26,6 +30,10 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.7" />
     <PackageReference Include="WPF-UI" Version="4.2.1" />
     <PackageReference Include="WPF-UI.Abstractions" Version="4.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\AngCoolLogo.png" />
   </ItemGroup>
 
 </Project>
