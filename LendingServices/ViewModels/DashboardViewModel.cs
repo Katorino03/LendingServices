@@ -21,6 +21,11 @@ namespace LendingServices.ViewModels
         [ObservableProperty]
         private int _overdueCustomersCount;
 
+        public record OverdueCustomerInfo(string Name, decimal Balance);
+
+        [ObservableProperty]
+        private ObservableCollection<OverdueCustomerInfo> _overdueCustomersList = new();
+
         [ObservableProperty]
         private int _dueThisWeekCount;
 
@@ -53,11 +58,17 @@ namespace LendingServices.ViewModels
 
                 var today = DateTime.Today;
 
-                OverdueCustomersCount = loans
+               
+                var overdueCustomers = loans
                     .Where(l => l.IsActive && l.DueDate < today && (l.TotalAmountToPay - l.Payments.Sum(p => p.AmountPaid)) > 0)
-                    .Select(l => l.CustomerId)
-                    .Distinct()
-                    .Count();
+                    .Select(l => new OverdueCustomerInfo(
+                        l.Customer.Name,
+                        l.TotalAmountToPay - l.Payments.Sum(p => p.AmountPaid)
+                    ))
+                    .ToList();
+
+                OverdueCustomersCount = overdueCustomers.Count;
+                OverdueCustomersList = new ObservableCollection<OverdueCustomerInfo>(overdueCustomers);
 
                 var nextWeek = today.AddDays(7);
                 DueThisWeekCount = loans
@@ -73,7 +84,7 @@ namespace LendingServices.ViewModels
                     .Where(p => p.PaymentDate >= startOfDay && p.PaymentDate <= endOfDay)
                     .SumAsync(p => p.AmountPaid);
 
-                // Load Chart Data (Past 7 days)
+                
                 var last7Days = Enumerable.Range(0, 7).Select(offset => today.AddDays(-6 + offset)).ToList();
                 var chartData = new double[7];
                 var labels = new string[7];

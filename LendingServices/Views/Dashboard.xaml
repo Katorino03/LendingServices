@@ -16,8 +16,6 @@
             <RowDefinition Height="320*"/>
         </Grid.RowDefinitions>
 
-       
-
         <UniformGrid Grid.Row="2" Columns="4" Margin="0,0,0,20">
 
             <UniformGrid.Resources>
@@ -39,28 +37,28 @@
             <Border>
                 <StackPanel>
                     <TextBlock Text="Total Outstanding" FontSize = "15" Foreground="Gray" FontWeight="SemiBold"/>
-                    <TextBlock Text="₱00,000" FontSize="30"  FontWeight="Bold" Foreground="#FF61C6E8"/>
+                    <TextBlock Text="{Binding TotalOutstanding, StringFormat='₱{0:N2}'}" FontSize="30"  FontWeight="Bold" Foreground="#FF61C6E8"/>
                 </StackPanel>
             </Border>
 
             <Border BorderBrush="#FFFB9393">
                 <StackPanel>
                     <TextBlock Text="Overdue Customers" FontSize = "15" Foreground="Gray" FontWeight="SemiBold"/>
-                    <TextBlock Text="0" FontSize="30" Foreground="Red" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding OverdueCustomersCount}" FontSize="30" Foreground="Red" FontWeight="Bold"/>
                 </StackPanel>
             </Border>
 
             <Border BorderBrush="#FFFCF09F">
                 <StackPanel>
                     <TextBlock Text="Due This Week" FontSize = "15" Foreground="Gray" FontWeight="SemiBold"/>
-                    <TextBlock Text="0" FontSize="30" Foreground="#F59E0B" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding DueThisWeekCount}" FontSize="30" Foreground="#F59E0B" FontWeight="Bold"/>
                 </StackPanel>
             </Border>
 
             <Border BorderBrush="#FFB1F6B9">
                 <StackPanel>
                     <TextBlock Text="Daily Receipts" FontSize = "15" Foreground="Gray" FontWeight="SemiBold"/>
-                    <TextBlock Text="₱00,000" FontSize="30" Foreground="Green" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding DailyReceipts, StringFormat='₱{0:N2}'}" FontSize="30" Foreground="Green" FontWeight="Bold"/>
                 </StackPanel>
             </Border>
 
@@ -73,21 +71,46 @@
             </Grid.ColumnDefinitions>
 
             <Border Margin="5"
-                    Padding="15"
-                    CornerRadius="15"
-                    Background="AliceBlue"
-                    BorderBrush="#FFF18F89"
-                    BorderThickness="2">
+        Padding="15"
+        CornerRadius="15"
+        Background="AliceBlue"
+        BorderBrush="#FFF18F89"
+        BorderThickness="2">
 
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="15" Opacity="0.2"/>
                 </Border.Effect>
 
                 <StackPanel>
-                    <TextBlock Text="Overdue Customers" FontSize = "20" Foreground="#EF4444" FontWeight="Bold"/>
-                    <StackPanel Margin="0,10,0,0">
-                        <TextBlock Text=" " Foreground="#B91C1C"/>
-                    </StackPanel>
+                    <TextBlock Text="Overdue Customers" FontSize="20" Foreground="#EF4444" FontWeight="Bold"/>
+
+                    <ScrollViewer MaxHeight="220" Margin="0,10,0,0" VerticalScrollBarVisibility="Auto">
+                        <ItemsControl ItemsSource="{Binding OverdueCustomersList}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="{Binding Name}" 
+                               FontSize="15" 
+                               FontWeight="SemiBold" 
+                               Foreground="#B91C1C" 
+                               VerticalAlignment="Center"/>
+
+                                        <TextBlock Grid.Column="1"
+                               Text="{Binding Balance, StringFormat='₱{0:N2}'}" 
+                               FontSize="15" 
+                               FontWeight="Bold" 
+                               Foreground="#EF4444"
+                               Margin="10,0,0,0"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
                 </StackPanel>
             </Border>
 
@@ -104,7 +127,7 @@
                 </Border.Effect>
 
                 <StackPanel>
-                    <TextBlock Text="Daily Reciept" FontSize = "20" FontWeight="Bold"/>
+                    <TextBlock Text="Daily Receipt" FontSize = "20" FontWeight="Bold"/>
                     <lvc:CartesianChart Series="{Binding ReceiptsSeries}"
                                         XAxes="{Binding XAxes}"
                                         Height="261" 
