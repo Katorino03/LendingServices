@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Navigation; // Siguroha nga naa ni para sa NavigationService
 
 namespace LendingServices.Views
 {
@@ -40,6 +41,14 @@ namespace LendingServices.Views
             if (pd.ShowDialog() == true)
             {
                 pd.PrintVisual(printArea, "Daily Collection");
+            }
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.NavigationService != null && this.NavigationService.CanGoBack)
+            {
+                this.NavigationService.GoBack(); 
             }
         }
     }

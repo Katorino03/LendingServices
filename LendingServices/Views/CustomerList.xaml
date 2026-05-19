@@ -52,13 +52,15 @@
                                   Opacity="0.18"/>
             </Border.Effect>
 
-            <StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
 
-                <Grid Margin="0,0,0,20">
-
-                   
-
+                <Grid Grid.Row="0" Margin="0,0,0,20">
                     <StackPanel Orientation="Horizontal" 
                                 HorizontalAlignment="Right" 
                                 VerticalAlignment="Center">
@@ -76,7 +78,6 @@
                                 Cursor="Hand"
                                 Padding="6"
                                 Width="32" Height="32">
-
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Template">
@@ -109,7 +110,7 @@
                 </Grid>
 
 
-                <Border CornerRadius="18"
+                <Border Grid.Row="1" CornerRadius="18"
                         Padding="18"
                         Background="#FFD5E9FB"
                         BorderBrush="#FF93CFF8"
@@ -117,14 +118,12 @@
                         Margin="0,0,0,18">
 
                     <Grid>
-
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*"/>
                             <ColumnDefinition Width="1.5*"/>
                             <ColumnDefinition Width="1.5*"/>
                         </Grid.ColumnDefinitions>
 
-                    
                         <StackPanel Margin="0,0,10,0">
                             <TextBlock Text="Search"
                                        FontSize="20"
@@ -148,7 +147,6 @@
                                          Background="Transparent"/>
                             </Border>
                         </StackPanel>
-
 
                         <StackPanel Grid.Column="1" Margin="10,0">
                             <TextBlock Text="Sort By"
@@ -174,7 +172,6 @@
                             </Border>
                         </StackPanel>
 
-
                         <StackPanel Grid.Column="2">
                             <TextBlock Text="Filter Status"
                                        FontSize="20"
@@ -199,18 +196,18 @@
                                 </ComboBox>
                             </Border>
                         </StackPanel>
-
                     </Grid>
                 </Border>
 
-            
-                <Border CornerRadius="20"
+
+                <Border Grid.Row="2" CornerRadius="20"
                         Padding="12"
                         Background="#FFDFF0FF"
                         BorderBrush="#FFDFF0FF"
                         BorderThickness="1">
 
                     <DataGrid x:Name="myDataGrid" ItemsSource="{Binding Customers}"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto"
                               AutoGenerateColumns="False"
                               CanUserAddRows="False"
                               GridLinesVisibility="None"
@@ -222,8 +219,6 @@
                               Foreground="#334155">
 
                         <DataGrid.Resources>
-
-
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="Background" Value="#F8FAFC"/>
                                 <Setter Property="Foreground" Value="#334155"/>
@@ -234,7 +229,6 @@
                                 <Setter Property="BorderThickness" Value="0"/>
                                 <Setter Property="HorizontalContentAlignment" Value="Center"/>
                             </Style>
-
 
                             <Style TargetType="DataGridRow">
                                 <Setter Property="Background" Value="Transparent"/>
@@ -247,7 +241,6 @@
                                 </Style.Triggers>
                             </Style>
 
-
                             <Style TargetType="DataGridCell">
                                 <Setter Property="BorderThickness" Value="0"/>
                                 <Setter Property="Padding" Value="10,0"/>
@@ -258,21 +251,16 @@
                                                     BorderBrush="{TemplateBinding BorderBrush}" 
                                                     BorderThickness="{TemplateBinding BorderThickness}" 
                                                     Padding="{TemplateBinding Padding}">
-
                                                 <ContentPresenter VerticalAlignment="Center" 
                                                                   HorizontalAlignment="Center"/>
-
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
                             </Style>
-
                         </DataGrid.Resources>
 
-
                         <DataGrid.Columns>
-
                             <DataGridTextColumn Header="Account No."
                                                 Binding="{Binding AccountNo}"
                                                 Width="*"/>
@@ -289,23 +277,19 @@
                                                     Margin="10,0,0,0"
                                                     CornerRadius="6" 
                                                     VerticalAlignment="Center">
-
                                                 <Border.Style>
                                                     <Style TargetType="Border">
                                                         <Setter Property="Visibility" Value="Collapsed" />
                                                         <Setter Property="Background" Value="#E2E8F0"/>
-
                                                         <Style.Triggers>
                                                             <DataTrigger Binding="{Binding LoanTag}" Value="Renew">
                                                                 <Setter Property="Visibility" Value="Visible" />
                                                                 <Setter Property="Background" Value="#FEF08A"/>
                                                             </DataTrigger>
-
                                                             <DataTrigger Binding="{Binding LoanTag}" Value="Restructured">
                                                                 <Setter Property="Visibility" Value="Visible" />
                                                                 <Setter Property="Background" Value="#FECDD3"/>
                                                             </DataTrigger>
-
                                                             <DataTrigger Binding="{Binding LoanTag}" Value="Fully Paid">
                                                                 <Setter Property="Visibility" Value="Visible" />
                                                                 <Setter Property="Background" Value="#BBF7D0"/>
@@ -320,16 +304,13 @@
                                                     <TextBlock.Style>
                                                         <Style TargetType="TextBlock">
                                                             <Setter Property="Foreground" Value="#475569"/>
-
                                                             <Style.Triggers>
                                                                 <DataTrigger Binding="{Binding LoanTag}" Value="Renew">
                                                                     <Setter Property="Foreground" Value="#A16207"/>
                                                                 </DataTrigger>
-
                                                                 <DataTrigger Binding="{Binding LoanTag}" Value="Restructured">
                                                                     <Setter Property="Foreground" Value="#BE123C"/>
                                                                 </DataTrigger>
-
                                                                 <DataTrigger Binding="{Binding LoanTag}" Value="Fully Paid">
                                                                     <Setter Property="Foreground" Value="#166534"/>
                                                                 </DataTrigger>
@@ -374,55 +355,45 @@
                                                 Binding="{Binding DueDate, StringFormat='MM/dd/yyyy'}" 
                                                 Width="*"/>
 
-
                             <DataGridTemplateColumn Header="Status" Width="90">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-
                                         <Border Padding="6"
                                                 CornerRadius="10"
                                                 Background="{Binding StatusColor}">
-
                                             <TextBlock Text="{Binding Status}"
                                                        Foreground="White"
                                                        HorizontalAlignment="Center"/>
                                         </Border>
-
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-
                             <DataGridTemplateColumn Header="Action" Width="120" >
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-
                                         <Button Content="View Ledger"
                                                 Click="ViewLedger_Click"
                                                 Padding="6,3"
                                                 Foreground="White"
                                                 BorderThickness="0"
                                                 Cursor="Hand">
-
                                             <Button.Background>
                                                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                                                     <GradientStop Color="#2563EB" Offset="0"/>
                                                     <GradientStop Color="#7C3AED" Offset="1"/>
                                                 </LinearGradientBrush>
                                             </Button.Background>
-
                                         </Button>
-
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
                         </DataGrid.Columns>
                     </DataGrid>
-
                 </Border>
 
-            </StackPanel>
+            </Grid>
         </Border>
 
         <Grid Background="#40FFFFFF" 
@@ -442,7 +413,6 @@
                 </Border.Effect>
 
                 <StackPanel Orientation="Horizontal">
-
                     <Path Data="M 12,2 A 10,10 0 1,1 2,12" 
                           Stroke="#3B82F6" 
                           StrokeThickness="3" 

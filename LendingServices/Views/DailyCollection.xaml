@@ -3,30 +3,32 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       Title="Daily Collection"
-      Width="1200"
-      Height="800">
-
+      Width="1200">
     <Page.Background>
         <SolidColorBrush Color="#F4F9FB"/>
     </Page.Background>
 
-    <Grid>
+    <Grid VerticalAlignment="Stretch">
+
         <Border Width="1150"
                 Margin="20"
-                Padding="30"
+                Padding="30,30,30,20" 
                 CornerRadius="25"
                 Background="White"
                 BorderBrush="#B5DCF0"
                 BorderThickness="1.5"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Top">
+                VerticalAlignment="Stretch">
 
             <Border.Effect>
                 <DropShadowEffect BlurRadius="25" ShadowDepth="0" Opacity="0.12"/>
             </Border.Effect>
 
-            <ScrollViewer VerticalScrollBarVisibility="Auto" PanningMode="VerticalOnly">
-                <StackPanel>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" 
+                          HorizontalScrollBarVisibility="Disabled" 
+                          Padding="0,0,10,0">
+
+                <StackPanel Margin="0,0,0,40">
 
                     <Grid Margin="0,0,0,25">
                         <StackPanel>
@@ -97,6 +99,7 @@
                     </Grid>
 
                     <TextBlock Text="Customer Payment List" FontSize="18" FontWeight="Bold" Foreground="#5B9FC9" Margin="0,0,0,15"/>
+
                     <Border Background="#FAFCFD" CornerRadius="20" Padding="10" BorderBrush="#D8EDF8" BorderThickness="1.5" Margin="0,0,0,25">
                         <DataGrid x:Name="dgCustomers"
                                   ItemsSource="{Binding Customers}"
