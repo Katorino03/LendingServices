@@ -1,13 +1,15 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using LendingServices.Data;
 using LendingServices.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using Microsoft.EntityFrameworkCore;
+using SkiaSharp;
+using System;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace LendingServices.ViewModels
 {
@@ -101,13 +103,18 @@ namespace LendingServices.ViewModels
                     labels[i] = dayStart.ToString("ddd"); // Mon, Tue, etc.
                 }
 
+                
                 ReceiptsSeries = new ObservableCollection<ISeries>
-                {
+{
                     new LineSeries<double>
                     {
                         Values = chartData,
-                        Fill = null,
-                        Name = "Daily Receipts"
+                        Name = "Daily Receipts",
+                        Fill = new SolidColorPaint(new SKColor(59, 130, 246, 50)), // Light Blue fill
+                        Stroke = new SolidColorPaint(new SKColor(59, 130, 246), 4), // Blue line, thick
+                        GeometrySize = 10, // Kadako sa mga dots
+                        GeometryStroke = new SolidColorPaint(new SKColor(255, 255, 255), 2),
+                        LineSmoothness = 1 // 1 = Smooth curve, 0 = straight lines
                     }
                 };
 
